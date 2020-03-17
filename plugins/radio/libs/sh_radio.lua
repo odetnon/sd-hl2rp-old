@@ -18,7 +18,7 @@ function ix.radio.RegisterChannel(uniqueID, path, luaGenerated, channelTable)
 		if (!luaGenerated and path) then
 			ix.util.Include(path.."/"..v, "shared")
 		elseif (luaGenerated and channelTable) then
-		    table.Merge(CHANNEL, channelTable)
+			table.Merge(CHANNEL, channelTable)
 		end
 
 		CHANNEL.name = CHANNEL.name or "Unknown"
