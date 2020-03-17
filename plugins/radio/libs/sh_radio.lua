@@ -31,14 +31,6 @@ function ix.radio.RegisterChannel(uniqueID, path, luaGenerated, channelTable)
 end
 
 if (SERVER) then
-	local function varChannels(client, tbl)
-		if (tbl) then
-			return client:SetLocalVar("channels", tbl)
-		end
-
-		return client:GetLocalVar("channels")
-	end
-
 	function ix.radio.ResetPlayerChannels(client)
 		client:SetLocalVar("channels", {})
 
@@ -159,7 +151,7 @@ if (SERVER) then
 
 			for k, v in pairs(player.GetAll()) do
 				if (!IsValid(v) or !v:Alive()) then continue end
-				
+
 				if (hook.Run("CanHearRadioTrasmit", v, data, clientPos) or v == client) then
 					receivers[#receivers + 1] = v
 				elseif (hook.Run("CanEavesdropRadioTrasmit", v, data, clientPos)) then
