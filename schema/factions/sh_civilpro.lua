@@ -19,6 +19,9 @@ FACTION.models = {
 	"models/kake/metropolice_male09.mdl",
 	"models/kake/metropolice_male09_hair.mdl"
 }
+FACTION.channels = {
+	["tac"] = true,
+}
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
@@ -27,6 +30,10 @@ function FACTION:OnCharacterCreated(client, character)
 	inventory:Add("usp_match", 1)
 	inventory:Add("9mm_ammo", 1)
 	inventory:Add("cp_mask", 1)
+end
+
+function FACTION:GetDefaultName(client)
+	return "c17:00.TAGLINE-0", true
 end
 
 FACTION_CP = FACTION.index
