@@ -9,24 +9,24 @@ function ix.radio.LoadFromDir(path)
 	for _, v in ipairs(file.Find(path.."/*.lua", "LUA")) do
 		local niceName = v:sub(4, -5)
 
-		ix.radio.RegisterChannel(niceName, path, false, nil)
+		ix.radio.RegisterChannel(niceName, path.."/"..v, false, nil)
 	end
 end
 
 function ix.radio.RegisterChannel(uniqueID, path, luaGenerated, channelTable)
 	CHANNEL = {index = table.Count(ix.radio.channels) + 1}
 		if (!luaGenerated and path) then
-			ix.util.Include(path.."/"..v, "shared")
+			ix.util.Include(path, "shared")
 		elseif (luaGenerated and channelTable) then
 			table.Merge(CHANNEL, channelTable)
 		end
 
 		CHANNEL.name = CHANNEL.name or "Unknown"
 		CHANNEL.color = CHANNEL.color or Color(25, 175, 25)
-		CHANNEL.uniqueID = CHANNEL.uniqueID or niceName
+		CHANNEL.uniqueID = CHANNEL.uniqueID or uniqueID
 
 		ix.radio.indices[CHANNEL.index] = CHANNEL
-		ix.radio.channels[niceName] = CHANNEL
+		ix.radio.channels[CHANNEL.uniqueID] = CHANNEL
 	CHANNEL = nil
 end
 
@@ -44,6 +44,10 @@ if (SERVER) then
 			end
 		end
 
+		timer.Simple(0.1, function()
+			hook.Run("OnResetPlayerChannels", client)
+		end)
+
 		local transmitChannel = client:GetLocalVar("transmitChannel")
 
 		if (!transmitChannel or !ix.radio.PlayerHasChannel(client, transmitChannel)) then
@@ -51,13 +55,13 @@ if (SERVER) then
 		end
 	end
 
-	function ix.radio.ResetPlayerTransmitChannel(client)
+	function ix.radio.ResetPlayerTransmitChannel(client, bForce)
 		local channels = client:GetLocalVar("channels")
 
 		if (table.Count(channels) > 0) then
 			local randomChannel = channels[math.random(#channels)]
 
-			if (ix.radio.Get(randomChannel)) then
+			if (ix.radio.Get(randomChannel) or bForce) then
 				client:SetLocalVar("transmitChannel", randomChannel)
 			else
 				ix.radio.RemoveChannelFromPlayer(client, randomChannel, true)
@@ -72,15 +76,17 @@ if (SERVER) then
 	function ix.radio.RemoveChannelFromPlayer(client, uniqueID, bForce)
 		local channel = ix.radio.Get(uniqueID)
 
-		if (channel and !bForce) then
+		if (channel or bForce) then
 			local channels = client:GetLocalVar("channels")
 
-			table.remove(channels, uniqueID)
+			if (!table.HasValue(channels, uniqueID)) then return end
+
+			table.RemoveByValue(channels, uniqueID)
 
 			client:SetLocalVar("channels", channels)
 
 			if (uniqueID == client:GetLocalVar("transmitChannel")) then
-				ix.radio.ResetPlayerTransmitChannel(client)
+				ix.radio.ResetPlayerTransmitChannel(client, bForce)
 			end
 		end
 	end
@@ -88,8 +94,10 @@ if (SERVER) then
 	function ix.radio.AddChannelToPlayer(client, uniqueID, bForce)
 		local channel = ix.radio.Get(uniqueID)
 
-		if (channel and !bForce) then
+		if (channel or bForce) then
 			local channels = client:GetLocalVar("channels")
+
+			if (table.HasValue(channels, uniqueID)) then return end
 
 			table.insert(channels, uniqueID)
 
@@ -105,13 +113,13 @@ if (SERVER) then
 		end
 	end
 
-	function ix.radio.PlayerHasChannel(client, uniqueID)
+	function ix.radio.PlayerHasChannel(client, uniqueID, bForce)
 		local channel = ix.radio.Get(uniqueID)
 
-		if (channel) then
+		if (channel or bForce) then
 			return table.HasValue(client:GetLocalVar("channels"), uniqueID)
 		else
-			return false
+		    return false
 		end
 	end
 
@@ -123,13 +131,9 @@ if (SERVER) then
 			channel = data.channel
 		end
 
-		channel = ix.radio.Get(channel)
+		data.actualChannel = ix.radio.Get(channel)
 
 		if (channel) then
-			if (!data.color) then
-				data.color = channel.color
-			end
-
 			data.range = ix.config.Get("chatRange", 280)
 			data.prefix = "radios"
 
@@ -141,8 +145,15 @@ if (SERVER) then
 				data.prefix = "whispers"
 			end
 
-			data.channelID = channel.uniqueID
-			data.channel = channel.name
+			if (data.actualChannel) then
+				data.channelID = data.actualChannel.uniqueID
+				data.channel = data.actualChannel.name
+
+				data.color = data.color or data.actualChannel.color
+			else
+			    data.channelID = channel
+				data.channel = channel
+			end
 
 			local receivers = {}
 			local eavesdroppers = {}
@@ -152,7 +163,7 @@ if (SERVER) then
 			for k, v in pairs(player.GetAll()) do
 				if (!IsValid(v) or !v:Alive()) then continue end
 
-				if (hook.Run("CanHearRadioTrasmit", v, data, clientPos) or v == client) then
+				if (hook.Run("CanHearRadioTrasmit", v, data) or v == client) then
 					receivers[#receivers + 1] = v
 				elseif (hook.Run("CanEavesdropRadioTrasmit", v, data, clientPos)) then
 					eavesdroppers[#eavesdroppers + 1] = v
@@ -162,7 +173,7 @@ if (SERVER) then
 			ix.chat.Send(client, "radio_transmit", message, false, receivers, data)
 			ix.chat.Send(client, "radio_eavesdrop", message, false, eavesdroppers, data)
 		else
-		    return "You are not on a valid radio channel!"
+			return "You are not on a valid radio channel!"
 		end
 	end
 end

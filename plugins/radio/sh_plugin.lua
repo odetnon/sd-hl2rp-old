@@ -5,6 +5,10 @@ PLUGIN.name = "Enhanced Radio"
 PLUGIN.author = "wowm0d"
 PLUGIN.description = "Adds extended radio library and utilies."
 
+if (SERVER) then
+	util.AddNetworkString("ixItemFrequency")
+end
+
 ix.util.Include("cl_hooks.lua")
 ix.util.Include("sv_hooks.lua")
 
@@ -18,10 +22,8 @@ do
 	end
 
 	ix.command.Add("Radio", COMMAND)
-end
 
-do
-	local COMMAND = {}
+	COMMAND = {}
 	COMMAND.arguments = ix.type.text
 	COMMAND.alias = "RW"
 
@@ -30,10 +32,8 @@ do
 	end
 
 	ix.command.Add("RadioWhisper", COMMAND)
-end
 
-do
-	local COMMAND = {}
+	COMMAND = {}
 	COMMAND.arguments = ix.type.text
 	COMMAND.alias = "RY"
 
@@ -64,6 +64,10 @@ function PLUGIN:InitializedChatClasses()
 
 	function CLASS:OnChatAdd(speaker, text, anonymous, data)
 		local speakerName = hook.Run("GetCharacterName", speaker, "radio_trasmit") or speaker:Name()
+
+		if (data.prefix == "radios") then
+			data.prefix = "says"
+		end
 
 		chat.AddText(self:GetColor(speaker, text), string.format(self.format, speakerName, data.prefix, text))
 	end
