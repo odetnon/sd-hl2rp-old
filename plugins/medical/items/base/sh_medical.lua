@@ -47,5 +47,25 @@ ITEM.functions.Apply = {
 		return false
 	end,
 	OnRun = function(item)
+		local client = item.player
+		local entity = client:GetEyeTraceNoCursor().Entity
+
+		if (IsValid(entity) and entity:Alive()) then
+			if (item.stopBleed) then
+				entity.bleeding = false
+			end
+
+			if (item.slowHealth > 0) then
+				entity:AddHealBoost(item.slowHealth)
+			end
+
+			if (item.instantHealth > 0) then
+				entity:SetHealth(math.min(entity:Health() + item.instantHealth, entity:GetMaxHealth()))
+			end
+
+			if (item.useSound) then
+				entity:EmitSound(item.useSound)
+			end
+		end
 	end
 }
