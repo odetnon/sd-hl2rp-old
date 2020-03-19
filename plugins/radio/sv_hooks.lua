@@ -25,29 +25,27 @@ function PLUGIN:CanEavesdropRadioTrasmit(client, data, transmitPos)
 	end
 end
 
-local function AddItemChannel(client, freq)
-	ix.radio.AddChannelToPlayer(client, freq:find("^%d%d%d.%d$") and "FREQ "..freq or freq, true)
-
-	local transmitChannel = client:GetLocalVar("transmitChannel")
-
-	if (!transmitChannel or !ix.radio.PlayerHasChannel(client, transmitChannel)) then
-		ix.radio.ResetPlayerTransmitChannel(client, true)
-	end
-end
-
-local function RemoveItemChannel(client, freq)
-	ix.radio.RemoveChannelFromPlayer(client, freq:find("^%d%d%d.%d$") and "FREQ "..freq or freq, true)
-end
-
 function PLUGIN:OnResetPlayerChannels(client)
 	local items = client:GetItems()
 
-	if (items) then
-		for _, item in pairs(items) do
-			if (item:GetData("frequency", "000.0") != "000.0") then
-				AddItemChannel(client, item:GetData("frequency"))
-			end
+	local bFreqRadio = false
+
+	for _, v in pairs(items or {}) do
+		if (v.base != "base_radio") then continue end
+
+		if (v.channel and ix.radio.Get(v.channel)) then
+			ix.radio.AddChannelToPlayer(client, v.channel)
+		elseif (v:GetData("frequency", "000.0") != "000.0") then
+		    ix.radio.AddChannelToPlayer(client, "FREQ "..v:GetData("frequency"), true)
+
+		    bFreqRadio = true
 		end
+	end
+
+	local transmitChannel = client:GetLocalVar("transmitChannel")
+
+	if (!transmitChannel or !ix.radio.PlayerHasChannel(client, transmitChannel, bFreqRadio)) then
+		ix.radio.ResetPlayerTransmitChannel(client, bFreqRadio)
 	end
 end
 
@@ -56,8 +54,8 @@ function PLUGIN:InventoryItemAdded(oldInv, inventory, item)
 
 	local client = inventory:GetOwner()
 
-	if (item:GetData("frequency", "000.0") != "000.0") then
-		AddItemChannel(client, item:GetData("frequency"))
+	if (item.base == "base_radio") then
+		ix.radio.ResetPlayerChannels(client)
 	end
 end
 
@@ -66,8 +64,10 @@ function PLUGIN:InventoryItemRemoved(inventory, item)
 
 	local client = inventory:GetOwner()
 
-	if (item:GetData("frequency", "000.0") != "000.0") then
-		RemoveItemChannel(client, item:GetData("frequency"))
+	if (item.base == "base_radio") then
+		timer.Simple(0.1, function()
+			ix.radio.ResetPlayerChannels(client)
+		end)
 	end
 end
 

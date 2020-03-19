@@ -6,6 +6,12 @@ FACTION.models = {
 	"models/bloocobalt/combine/combine_s.mdl",
 	"models/bloocobalt/combine/combine_e.mdl"
 }
+FACTION.channels = {
+	["cwui"] = true,
+	["overwatch"] = true,
+	["combine"] = true,
+	["tac"] = true
+}
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()

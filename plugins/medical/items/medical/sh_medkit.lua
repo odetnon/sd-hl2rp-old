@@ -1,5 +1,5 @@
 
-ITEM.name = "Medkit"
+ITEM.name = "M.S.E Medkit"
 ITEM.description = "A fully kitted combine made, medkit"
 ITEM.model = "models/items/healthkit.mdl"
 

@@ -42,6 +42,47 @@ do
 	end
 
 	ix.command.Add("RadioYell", COMMAND)
+
+	COMMAND = {}
+	COMMAND.arguments = ix.type.text
+	COMMAND.alias = "SC"
+
+	function COMMAND:OnRun(client, text)
+		local channels = client:GetLocalVar("channels", {})
+
+		local transmitChannel = nil
+		local bForce = false
+
+		for _, v in pairs(channels) do
+			if (string.find(v:lower(), text:lower())) then
+				if (!ix.radio.Get(v)) then
+					bForce = true
+				end
+
+				transmitChannel = v
+
+				break
+			end
+		end
+
+		if (transmitChannel) then
+			local channelString = ""
+
+			if (!bForce) then
+				channelString = ix.radio.Get(transmitChannel).name
+			else
+				channelString = transmitChannel
+			end
+
+			ix.radio.SetPlayerTransmitChannel(client, transmitChannel, bForce)
+
+			client:Notify("You've changed your transmit channel to "..channelString..".")
+		else
+			client:Notify("No channel found with that identifier!")
+		end
+	end
+
+	ix.command.Add("SetChannel", COMMAND)
 end
 
 function PLUGIN:InitializedChatClasses()

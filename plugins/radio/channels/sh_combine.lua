@@ -1,4 +1,3 @@
 
 CHANNEL.name = "COMBINE"
-CHANNEL.uniqueID = "COMBINE"
-CHANNEL.color = Color(250, 50, 50)
+CHANNEL.color = Color(250, 100, 0)

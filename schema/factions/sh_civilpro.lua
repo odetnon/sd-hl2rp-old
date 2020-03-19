@@ -20,7 +20,8 @@ FACTION.models = {
 	"models/kake/metropolice_male09_hair.mdl"
 }
 FACTION.channels = {
-	["tac"] = true,
+	["combine"] = true,
+	["tac"] = true
 }
 
 function FACTION:OnCharacterCreated(client, character)

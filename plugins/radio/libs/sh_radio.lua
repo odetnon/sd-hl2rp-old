@@ -105,10 +105,10 @@ if (SERVER) then
 		end
 	end
 
-	function ix.radio.SetPlayertransmitChannel(client, uniqueID)
+	function ix.radio.SetPlayerTransmitChannel(client, uniqueID, bForce)
 		local channel = ix.radio.Get(uniqueID)
 
-		if (channel and ix.radio.PlayerHasChannel(client, uniqueID)) then
+		if ((channel or bForce) and ix.radio.PlayerHasChannel(client, uniqueID, bForce)) then
 			client:SetLocalVar("transmitChannel", uniqueID)
 		end
 	end

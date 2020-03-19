@@ -2,6 +2,7 @@
 ITEM.name = "Medical Base"
 ITEM.description = "A healing item"
 ITEM.model = "models/warz/items/bandage.mdl"
+ITEM.category = "Medical"
 
 ITEM.stopBleed = false
 ITEM.useSound = nil
