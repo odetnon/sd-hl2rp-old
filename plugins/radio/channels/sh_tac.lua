@@ -1,3 +1,3 @@
 
 CHANNEL.name = "TAC"
-CHANNEL.color = Color(50, 150, 250)
+CHANNEL.color = Color(161, 189, 177)

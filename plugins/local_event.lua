@@ -33,7 +33,7 @@ if (CLIENT) then
 			end
 
 			render.SetColorMaterial()
-			render.DrawSphere(pos, range, 30, 30, ColorAlpha((ix.config.Get("color"), 100))
+			render.DrawSphere(pos, range, 30, 30, ColorAlpha(ix.config.Get("color"), 100))
 		end
 	end
 end

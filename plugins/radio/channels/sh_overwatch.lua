@@ -1,3 +1,3 @@
 
 CHANNEL.name = "OVERWATCH"
-CHANNEL.color = Color(250, 50, 50)
+CHANNEL.color = Color(112, 14, 13)

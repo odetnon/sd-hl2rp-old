@@ -7,11 +7,19 @@ FACTION.models = {
 	"models/bloocobalt/combine/combine_e.mdl"
 }
 FACTION.channels = {
+	["union"] = true,
+	["um"] = true,
+	["terminal"] = true,
+	["division"] = true,
 	["cwui"] = true,
 	["overwatch"] = true,
 	["combine"] = true,
 	["tac"] = true
 }
+FACTION.canSeeWaypoints = true
+FACTION.canAddWaypoints = true
+FACTION.canRemoveWaypoints = true
+FACTION.canUpdateWaypoints = true
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()

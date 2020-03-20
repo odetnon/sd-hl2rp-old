@@ -14,10 +14,15 @@ function playerMeta:AddHealBoost(amount)
 		curBoost = curBoost + v
 	end
 
-	if (curBoost + amount > ix.config.Get("maxHealBoost", 100)) then return end
-
+	local maxHealBoost = ix.config.Get("maxHealBoost", 100)
 	local healRepetitions = ix.config.Get("healRepetitions", 4)
-	local healDelay = ix.config.Get("healDelay", 4)
+	local healDelay = ix.config.Get("healDelay", 10)
+
+	if (curBoost >= maxHealBoost) then
+		return
+	elseif (curBoost + amount > maxHealBoost) then
+		amount = maxHealBoost - curBoost
+	end
 
 	local index = (#self.healBoosts + 1)
 
@@ -26,7 +31,7 @@ function playerMeta:AddHealBoost(amount)
 	local timerIdentifier = (self:UniqueID().."healBoost"..index)
 
 	timer.Create(timerIdentifier, healDelay, healRepetitions, function()
-		if (!self:Alive()) then
+		if (!self:Alive() or self:Health() >= self:GetMaxHealth()) then
 			self.healBoosts[index] = nil
 
 			timer.Destroy(timerIdentifier)

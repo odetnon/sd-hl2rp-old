@@ -1,3 +1,3 @@
 
 CHANNEL.name = "COMBINE"
-CHANNEL.color = Color(250, 100, 0)
+CHANNEL.color = Color(177, 125, 26)

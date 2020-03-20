@@ -1,7 +1,7 @@
 
 ITEM.name = "M.S.E Med-Vial"
 ITEM.description = "A small vial of antlion larva antiseptic"
-ITEM.model = "models/items/healthvial.mdl"
+ITEM.model = "models/healthvial.mdl"
 
 ITEM.stopBleed = true
 ITEM.instantHealth = 5

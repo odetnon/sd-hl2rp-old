@@ -23,6 +23,8 @@ FACTION.channels = {
 	["combine"] = true,
 	["tac"] = true
 }
+FACTION.canSeeWaypoints = true
+FACTION.canAddWaypoints = true
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
