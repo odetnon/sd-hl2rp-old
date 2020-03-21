@@ -19,6 +19,7 @@ FACTION.models = {
 	"models/kake/metropolice_male09.mdl",
 	"models/kake/metropolice_male09_hair.mdl"
 }
+FACTION.isGloballyRecognized = true
 FACTION.channels = {
 	["combine"] = true,
 	["tac"] = true

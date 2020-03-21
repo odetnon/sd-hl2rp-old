@@ -7,6 +7,10 @@ PLUGIN.description = "Adds extended radio library and utilies."
 
 if (SERVER) then
 	util.AddNetworkString("ixItemFrequency")
+else
+	CHAT_RECOGNIZED = CHAT_RECOGNIZED or {}
+	CHAT_RECOGNIZED["radio_transmit"] = true
+	CHAT_RECOGNIZED["radio_eavesdrop"] = true
 end
 
 ix.util.Include("cl_hooks.lua")
@@ -92,7 +96,7 @@ function PLUGIN:InitializedChatClasses()
 
 	function CLASS:OnChatAdd(speaker, text, anonymous, data)
 		local textColor = data.color and data.color or self.color
-		local speakerName = hook.Run("GetCharacterName", speaker, "radio_trasmit") or speaker:Name()
+		local speakerName = hook.Run("GetCharacterName", speaker, self.uniqueID) or speaker:Name()
 
 		chat.AddText(textColor, string.format(self.format, speakerName, data.prefix, data.channel, text))
 	end
@@ -104,7 +108,7 @@ function PLUGIN:InitializedChatClasses()
 	CLASS.format = "%s %s on radio: \"%s\""
 
 	function CLASS:OnChatAdd(speaker, text, anonymous, data)
-		local speakerName = hook.Run("GetCharacterName", speaker, "radio_trasmit") or speaker:Name()
+		local speakerName = hook.Run("GetCharacterName", speaker, self.uniqueID) or speaker:Name()
 
 		if (data.prefix == "radios") then
 			data.prefix = "says"

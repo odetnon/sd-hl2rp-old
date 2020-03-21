@@ -35,7 +35,7 @@ function PLUGIN:OnResetPlayerChannels(client)
 
 		if (v.channel and ix.radio.Get(v.channel)) then
 			ix.radio.AddChannelToPlayer(client, v.channel)
-		elseif (v:GetData("frequency", "000.0") != "000.0") then
+		elseif (v:GetData("frequency", "000.0") != "000.0" and v.freqRadio) then
 		    ix.radio.AddChannelToPlayer(client, "FREQ "..v:GetData("frequency"), true)
 
 		    bFreqRadio = true
@@ -50,12 +50,20 @@ function PLUGIN:OnResetPlayerChannels(client)
 end
 
 function PLUGIN:InventoryItemAdded(oldInv, inventory, item)
-	if (!inventory.owner or (oldInv and oldInv.owner == inventory.owner)) then return end
+	if (!inventory.owner) then
+		if (oldInv and oldInv.owner) then
+			if (item.base == "base_radio") then
+				ix.radio.ResetPlayerChannels(oldInv:GetOwner())
+			end
+		end
 
-	local client = inventory:GetOwner()
+		return
+	end
+
+	if (oldInv and oldInv.owner == inventory.owner) then return end
 
 	if (item.base == "base_radio") then
-		ix.radio.ResetPlayerChannels(client)
+		ix.radio.ResetPlayerChannels(inventory:GetOwner())
 	end
 end
 

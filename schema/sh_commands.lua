@@ -10,7 +10,7 @@ do
 		ix.command.Add(cmd, {
 			description = cmdTbl.desc,
 			OnRun = function(self, client)
-				client:SendLua("gui.OpenUrl(\""..cmbTbl.url.."\")")
+				client:SendLua("gui.OpenURL(\""..cmdTbl.url.."\")")
 			end
 		})
 	end

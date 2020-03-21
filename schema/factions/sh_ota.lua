@@ -6,6 +6,7 @@ FACTION.models = {
 	"models/bloocobalt/combine/combine_s.mdl",
 	"models/bloocobalt/combine/combine_e.mdl"
 }
+FACTION.isGloballyRecognized = true
 FACTION.channels = {
 	["union"] = true,
 	["um"] = true,
@@ -20,6 +21,10 @@ FACTION.canSeeWaypoints = true
 FACTION.canAddWaypoints = true
 FACTION.canRemoveWaypoints = true
 FACTION.canUpdateWaypoints = true
+
+function FACTION:GetDefaultName(client)
+	return "s17:OTA.TAGLINE-0", true
+end
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()

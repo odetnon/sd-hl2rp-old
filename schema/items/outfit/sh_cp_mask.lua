@@ -6,5 +6,11 @@ ITEM.model = "models/dpfilms/metropolice/props/generic_gasmask.mdl"
 ITEM.replacements = "models/dpfilms/metropolice/hdpolice.mdl"
 
 function ITEM:CanEquipOutfit()
-	return (self:GetOwner():GetModel():find("models/kake/metropolice") == true)
+	local clientModel = self:GetOwner():GetModel()
+
+	if (clientModel:find("/metropolice_")) then
+		return true
+	end
+
+	return false
 end
