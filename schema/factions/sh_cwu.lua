@@ -20,4 +20,16 @@ FACTION.models = {
 	"models/wichacks/vannovest.mdl"
 }
 
+function FACTION:OnCharacterCreated(client, character)
+	local cid = string.format(math.random(1, 99999), "%05d")
+	local inventory = character:GetInventory()
+
+	character:SetData("cid", cid)
+
+	inventory:Add("cid", 1, {
+		name = character:GetName(),
+		cid = tostring(cid)
+	})
+end
+
 FACTION_CWU = FACTION.index

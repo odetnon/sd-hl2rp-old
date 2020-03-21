@@ -4,6 +4,7 @@ ITEM.description = "A mask with a fitted respirator and voice modulator"
 ITEM.model = "models/dpfilms/metropolice/props/generic_gasmask.mdl"
 
 ITEM.replacements = "models/dpfilms/metropolice/hdpolice.mdl"
+ITEM.isRespirator = true
 
 function ITEM:CanEquipOutfit()
 	local clientModel = self:GetOwner():GetModel()

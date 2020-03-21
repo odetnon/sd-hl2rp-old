@@ -29,9 +29,16 @@ end
 
 if (SERVER) then
 	local painSounds = {
-		"vo/npc/male01/pain01.wav",
-		"vo/npc/male01/pain04.wav",
-		"vo/npc/male01/pain06.wav"
+		male = {
+			"vo/npc/male01/pain01.wav",
+			"vo/npc/male01/pain04.wav",
+			"vo/npc/male01/pain06.wav"
+		},
+		female = {
+			"vo/npc/male01/pain02.wav",
+			"vo/npc/male01/pain05.wav",
+			"vo/npc/male01/pain07.wav"
+		}
 	}
 
 	function PLUGIN:PlayerTick(client)
@@ -60,7 +67,11 @@ if (SERVER) then
 					return
 				end
 
-				client:EmitSound(painSounds[math.random(1, #painSounds)])
+				if (client:IsFemale()) then
+					client:EmitSound(painSounds["female"][math.random(1, #painSounds["female"])])
+				else
+				    client:EmitSound(painSounds["male"][math.random(1, #painSounds["male"])])
+				end
 
 				if (ix.config.Get("fastGasReheal", true) == true) then
 					client.gasDamage = client.gasDamage and client.gasDamage + ix.config.Get("gasDamage", 15) or ix.config.Get("gasDamage", 15)
