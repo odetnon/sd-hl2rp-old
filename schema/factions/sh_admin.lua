@@ -1,5 +1,5 @@
 
-FACTION.name = "Server Administrator"
+FACTION.name = "Server Administration"
 FACTION.description = ""
 FACTION.color = Color(184, 61, 53)
 

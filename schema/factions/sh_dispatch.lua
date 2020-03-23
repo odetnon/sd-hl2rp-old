@@ -20,7 +20,7 @@ FACTION.canRemoveWaypoints = true
 FACTION.canUpdateWaypoints = true
 
 function FACTION:GetDefaultName(client)
-	return "s17:OW.AI-"..math.random(1000, 9999), true
+	return "S17:OW.AI-"..math.random(1000, 9999), true
 end
 
 function FACTION:OnSpawn(client)

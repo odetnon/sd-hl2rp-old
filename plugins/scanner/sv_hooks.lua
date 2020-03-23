@@ -48,16 +48,18 @@ function PLUGIN:CreateScanner(client, isClawScanner)
 end
 
 function PLUGIN:PlayerSpawn(client)
-	if (IsValid(client.ixScn)) then
-		client.ixScn.noRespawn = true
-		client.ixScn.spawn = client:GetPos()
-		client.ixScn:Remove()
-		client.ixScn = nil
-		client:SetViewEntity(NULL)
-	end
+	timer.Simple(0.1, function()
+		if (IsValid(client.ixScn)) then
+			client.ixScn.noRespawn = true
+			client.ixScn.spawn = client:GetPos()
+			client.ixScn:Remove()
+			client.ixScn = nil
+			client:SetViewEntity(NULL)
+		end
+	end)
 end
 
-function PLUGIN:PlayerLoadedChar(client)
+function PLUGIN:PlayerLoadedCharacter(client)
 	net.Start("ixScannerClearPicture")
 	net.Send(client)
 end
@@ -134,18 +136,6 @@ function PLUGIN:PlayerSwitchFlashlight(client, enabled)
 
 	scanner:EmitSound("npc/turret_floor/click1.wav", 50, pitch)
 	return false
-end
-
-function PLUGIN:PlayerCanPickupWeapon(client, weapon)
-	if (IsValid(client.ixScn)) then
-		return false
-	end
-end
-
-function PLUGIN:PlayerCanPickupItem(client, item)
-	if (IsValid(client.ixScn)) then
-		return false
-	end
 end
 
 function PLUGIN:PlayerFootstep(client)

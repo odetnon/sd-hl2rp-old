@@ -1,5 +1,5 @@
 
-FACTION.name = "Civil Workers Union"
+FACTION.name = "Civil Worker's Union"
 FACTION.description = ""
 FACTION.color = Color(50, 50, 150)
 FACTION.models = {
