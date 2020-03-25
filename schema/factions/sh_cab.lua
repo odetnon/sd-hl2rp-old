@@ -2,6 +2,7 @@
 FACTION.name = "Civil Authority"
 FACTION.description = ""
 FACTION.color = Color(250, 150, 50)
+FACTION.bAllowDatafile = true
 FACTION.models = {
 	{"models/lt_c/sci_fi/humans/female_01.mdl", 2, "0000"},
 	{"models/lt_c/sci_fi/humans/female_02.mdl", 2, "0000"},
