@@ -22,18 +22,14 @@ for i = 1, 10 do
 end
 
 function FACTION:OnCharacterCreated(client, character)
-	local id = Schema:ZeroNumber(math.random(1, 99999), 5)
+	local cid = string.format(math.random(1, 99999), "%05d")
 	local inventory = character:GetInventory()
-	local Timestamp = os.time()
-	local TimeString = os.date( "%H:%M:%S - %d/%m/%Y" , Timestamp )
 
-	character:SetData("cid", id)
+	character:SetData("cid", cid)
 
-	inventory:Add("suitcase", 1)
 	inventory:Add("cid", 1, {
-		["citizen_name"] = character:GetName(),
-		["cid"] = id,
-		["issue_date"] = TimeString,
+		name = character:GetName(),
+		cid = tostring(cid)
 	})
 end
 
