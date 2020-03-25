@@ -42,7 +42,13 @@ if (SERVER) then
 	}
 
 	function PLUGIN:PlayerTick(client)
-		if (!client:Alive()) then return end
+		if (!client:Alive() or IsValid(client)) then return end
+		
+		local faction = ix.faction.Get(client:Team())
+		
+		if (faction and faction.noGas) then
+			return
+		end
 
 		local area = ix.area.stored[client:GetArea()]
 
