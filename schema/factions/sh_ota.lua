@@ -24,7 +24,7 @@ FACTION.canRemoveWaypoints = true
 FACTION.canUpdateWaypoints = true
 
 function FACTION:GetDefaultName(client)
-	return "S17:OTA.ECHO."..string.format("%05d", math.random(1, 99999)), true
+	return "CMB:OTA.ECHO."..string.format("%05d", math.random(1, 99999)), true
 end
 
 function FACTION:OnCharacterCreated(client, character)
