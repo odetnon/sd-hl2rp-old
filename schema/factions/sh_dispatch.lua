@@ -1,5 +1,5 @@
 
-FACTION.name = "Dispatch"
+FACTION.name = "Airwatch"
 FACTION.description = ""
 FACTION.color = Color(35, 60, 70)
 FACTION.models = {"models/combine_scanner.mdl"}
@@ -20,7 +20,7 @@ FACTION.canRemoveWaypoints = true
 FACTION.canUpdateWaypoints = true
 
 function FACTION:GetDefaultName(client)
-	return "S17:OW.AI-"..math.random(1000, 9999), true
+	return "CMB:AW.AI-"..math.random(1000, 9999), true
 end
 
 function FACTION:OnSpawn(client)
