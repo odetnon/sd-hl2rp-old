@@ -18,6 +18,8 @@ FACTION.canSeeWaypoints = true
 FACTION.canAddWaypoints = true
 FACTION.canRemoveWaypoints = true
 FACTION.canUpdateWaypoints = true
+FACTION.noGas = true
+FACTION.noNeeds = true
 
 function FACTION:GetDefaultName(client)
 	return "CMB:AW.AI-"..math.random(1000, 9999), true
