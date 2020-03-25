@@ -26,7 +26,7 @@ DATAFILE_PERMISSION_ELEVATED = 4
 
 -- Permissions for the numerous factions.
 PLUGIN.Permissions = {
-	["Dispatch"] = DATAFILE_PERMISSION_ELEVATED,
+	["Airwatch"] = DATAFILE_PERMISSION_ELEVATED,
 
 	["Overwatch Transhuman Arm"] = DATAFILE_PERMISSION_ELEVATED,
 	["Civil Authority"] = DATAFILE_PERMISSION_FULL,
@@ -35,6 +35,7 @@ PLUGIN.Permissions = {
 	["Server Administration"] = DATAFILE_PERMISSION_MEDIUM,
 
 	["Civil Worker's Union"] = DATAFILE_PERMISSION_MINOR,
+	["Union Medical"] = DATAFILE_PERMISSION_MINOR,
 
 	["Citizen"] = DATAFILE_PERMISSION_NONE
 }
