@@ -1,7 +1,7 @@
 
 FACTION.name = "Civil Protection"
 FACTION.description = ""
-FACTION.color = Color(50, 150, 250)
+FACTION.color = Color(50, 100, 150)
 FACTION.models = {"models/cultist/hl_a/metropolice/metrocop.mdl"}
 FACTION.isGloballyRecognized = false
 FACTION.runSounds = {[0] = "NPC_MetroPolice.RunFootstepLeft", [1] = "NPC_MetroPolice.RunFootstepRight"}
