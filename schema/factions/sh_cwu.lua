@@ -1,7 +1,7 @@
 
 FACTION.name = "Civil Worker's Union"
 FACTION.description = ""
-FACTION.color = Color(128, 128, 0)
+FACTION.color = Color(150, 125, 100)
 FACTION.models = {
 	"models/models/army/female_01.mdl",
 	"models/models/army/female_02.mdl",
