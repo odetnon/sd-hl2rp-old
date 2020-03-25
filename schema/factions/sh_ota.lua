@@ -22,6 +22,8 @@ FACTION.canSeeWaypoints = true
 FACTION.canAddWaypoints = true
 FACTION.canRemoveWaypoints = true
 FACTION.canUpdateWaypoints = true
+FACTION.noGas = true
+FACTION.noNeeds = true
 
 function FACTION:GetDefaultName(client)
 	return "CMB:OTA.ECHO."..string.format("%05d", math.random(1, 99999)), true
