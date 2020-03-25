@@ -11,6 +11,7 @@ FACTION.channels = {
 }
 FACTION.canSeeWaypoints = true
 FACTION.canAddWaypoints = true
+FACTION.noGas = true
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
