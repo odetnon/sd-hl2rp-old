@@ -13,8 +13,8 @@ ENT.MaxRenderDistance = math.pow(256, 2)
 ENT.MaxStock = 4
 ENT.Items = {
 	{"REGULAR", "water", 15},
-	{"SPARKLING", "water_sparkling", 25},
-	{"SPECIAL", "water_special", 35}
+	{"FLAVOURED", "water_flavoured", 25},
+	{"SPARKLING", "water_sparkling", 35}
 }
 
 function ENT:GetStock(id)

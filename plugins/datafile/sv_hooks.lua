@@ -43,7 +43,7 @@ function PLUGIN:LoadDatafile(player)
 
 				if (result) then
 					player.ixDatafile = {
-						GenericData = util.JSONToTable(result[1]._GenericData)
+						GenericData = util.JSONToTable(result[1]._GenericData),
 						Datafile = util.JSONToTable(result[1]._Datafile)
 					}
 				end

@@ -1,19 +1,20 @@
--- NOTICE: ITEM MADE REDUNDANT! LEFT IN AS TEMPLATE
+--[[ NOTICE: ITEM MADE REDUNDANT! LEFT IN AS TEMPLATE
 
+ITEM.name = "Civil Protection Mask"
+ITEM.description = "A mask with a fitted respirator and voice modulator"
+ITEM.model = "models/dpfilms/metropolice/props/generic_gasmask.mdl"
 
---ITEM.name = "Civil Protection Mask"
---ITEM.description = "A mask with a fitted respirator and voice modulator"
---ITEM.model = "models/dpfilms/metropolice/props/generic_gasmask.mdl"
---
---ITEM.replacements = "models/dpfilms/metropolice/hdpolice.mdl"
---ITEM.isRespirator = true
---
---function ITEM:CanEquipOutfit()
---	local clientModel = self:GetOwner():GetModel()
---
---	if (clientModel:find("/metropolice_")) then
---		return true
---	end
--
---	return false
---end
+ITEM.replacements = "models/dpfilms/metropolice/hdpolice.mdl"
+ITEM.isRespirator = true
+
+function ITEM:CanEquipOutfit()
+	local clientModel = self:GetOwner():GetModel()
+
+	if (clientModel:find("/metropolice_")) then
+		return true
+	end
+
+	return false
+end
+
+--]]

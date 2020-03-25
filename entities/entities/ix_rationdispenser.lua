@@ -139,7 +139,7 @@ if (SERVER) then
 			return
 		end
 
-		if (client:Team() == FACTION_CITIZEN or client:Team() == FACTION_CWU or client:Team() == FACTION_UM) then
+		if (!client:IsCombine()) then
 			if (!self:GetEnabled()) then
 				self:DisplayError(6)
 				return
