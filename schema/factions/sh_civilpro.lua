@@ -19,7 +19,8 @@ FACTION.models = {
 	"models/kake/metropolice_male09.mdl",
 	"models/kake/metropolice_male09_hair.mdl"
 }
-FACTION.isGloballyRecognized = true
+FACTION.isGloballyRecognized = false
+FACTION.runSounds = {[0] = "NPC_CombineS.RunFootstepLeft", [1] = "NPC_CombineS.RunFootstepRight"}
 FACTION.channels = {
 	["combine"] = true,
 	["tac"] = true
