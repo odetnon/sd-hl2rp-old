@@ -3,15 +3,13 @@ FACTION.name = "Civil Protection"
 FACTION.description = ""
 FACTION.color = Color(50, 150, 250)
 FACTION.models = {"models/cultist/hl_a/metropolice/metrocop.mdl"}
-FACTION.factionRecognized = {
-	["civilpro"] = true
-}
-FACTION.runSounds = {[0] = "NPC_CombineS.RunFootstepLeft", [1] = "NPC_CombineS.RunFootstepRight"}
+FACTION.isGloballyRecognized = false
+FACTION.runSounds = {[0] = "NPC_MetroPolice.RunFootstepLeft", [1] = "NPC_MetroPolice.RunFootstepRight"}
+FACTION.bAllowDatafile = true
 FACTION.channels = {
 	["combine"] = true,
 	["tac"] = true
 }
-FACTION.bAllowDatafile = true
 FACTION.canSeeWaypoints = true
 FACTION.canAddWaypoints = true
 FACTION.noGas = true
