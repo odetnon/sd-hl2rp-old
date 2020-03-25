@@ -11,6 +11,7 @@ FACTION.factionRecognized = {
 	["ota"] = true
 }
 FACTION.runSounds = {[0] = "NPC_CombineS.RunFootstepLeft", [1] = "NPC_CombineS.RunFootstepRight"}
+FACTION.bAllowDatafile = true
 FACTION.channels = {
 	["union"] = true,
 	["um"] = true,
