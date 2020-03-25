@@ -1,5 +1,5 @@
 
-FACTION.name = "Civil Authority Board"
+FACTION.name = "Civil Authority"
 FACTION.description = ""
 FACTION.color = Color(250, 150, 50)
 FACTION.models = {
