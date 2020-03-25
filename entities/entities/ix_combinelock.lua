@@ -151,7 +151,7 @@ if (SERVER) then
 			return false
 		end
 
-		if ((!client:IsCombine() and client:Team() != FACTION_CAB) and (self:GetLockMode() == 2 and (!table.HasValue(client:GetItems(), "worker_card")) and (self:GetLockMode() == 3 and (!table.HasValue(client:GetItems(), "union_card")))) then
+		if ((!client:IsCombine() and client:Team() != FACTION_CAB) and (self:GetLockMode() == 2 and (!table.HasValue(client:GetItems(), "worker_card"))) and (self:GetLockMode() == 3 and (!table.HasValue(client:GetItems(), "union_card")))) then
 			self:DisplayError()
 			self.nextUseTime = CurTime() + 2
 
