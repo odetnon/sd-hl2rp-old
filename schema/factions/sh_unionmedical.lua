@@ -4,10 +4,6 @@ FACTION.description = "A Union Medical employee, specialised in the area of medi
 FACTION.color = Color(150, 125, 100, 255)
 FACTION.models = {}
 FACTION.bAllowDatafile = true
-FACTION.channels = {
-  ["union"] = true,
-  ["um"] = true
-}
 
 for i = 1, 4 do
 	table.insert(FACTION.models, "models/player/zelpa/clockwork/female_0"..i..".mdl")

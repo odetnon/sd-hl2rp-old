@@ -26,6 +26,7 @@ function FACTION:OnCharacterCreated(client, character)
 
 	character:SetData("cid", cid)
 
+	inventory:Add("worker_card", 1)
 	inventory:Add("cid", 1, {
 		name = character:GetName(),
 		cid = tostring(cid)
