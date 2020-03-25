@@ -29,7 +29,7 @@ PLUGIN.Permissions = {
 	["Dispatch"] = DATAFILE_PERMISSION_ELEVATED,
 
 	["Overwatch Transhuman Arm"] = DATAFILE_PERMISSION_ELEVATED,
-	["Civil Administration Board"] = DATAFILE_PERMISSION_FULL,
+	["Civil Authority"] = DATAFILE_PERMISSION_FULL,
 	["Civil Protection"] = DATAFILE_PERMISSION_FULL,
 
 	["Server Administration"] = DATAFILE_PERMISSION_MEDIUM,
