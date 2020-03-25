@@ -19,8 +19,6 @@ function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
 
 	inventory:Add("stunstick", 1)
-	inventory:Add("usp_match", 1)
-	inventory:Add("9mm_ammo", 1)
 end
 
 function FACTION:GetDefaultName(client)
