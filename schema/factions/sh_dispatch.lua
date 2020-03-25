@@ -14,6 +14,7 @@ FACTION.channels = {
 	["combine"] = true,
 	["tac"] = true
 }
+FACTION.bAllowDatafile = true
 FACTION.canSeeWaypoints = true
 FACTION.canAddWaypoints = true
 FACTION.canRemoveWaypoints = true
