@@ -6,7 +6,8 @@ FACTION.models = {
 	"models/bloocobalt/combine/combine_s.mdl",
 	"models/bloocobalt/combine/combine_e.mdl"
 }
-FACTION.isGloballyRecognized = true
+FACTION.isGloballyRecognized = false
+FACTION.runSounds = {[0] = "NPC_CombineS.RunFootstepLeft", [1] = "NPC_CombineS.RunFootstepRight"}
 FACTION.channels = {
 	["union"] = true,
 	["um"] = true,
