@@ -33,4 +33,4 @@ function FACTION:OnCharacterCreated(client, character)
 	})
 end
 
-FACTION_CWU = FACTION.index
+FACTION_UM = FACTION.index
