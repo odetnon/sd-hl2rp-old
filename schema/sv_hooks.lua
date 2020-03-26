@@ -25,7 +25,9 @@ end
 
 function Schema:PlayerUse(client, entity)
 	if (entity:IsDoor() and IsValid(entity.ixLock) and client:KeyDown(IN_SPEED)) then
-		return !entity.ixLock:Toggle(client)
+		entity.ixLock:Toggle(client)
+
+		return false
 	end
 end
 

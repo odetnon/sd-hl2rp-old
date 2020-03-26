@@ -148,14 +148,16 @@ if (SERVER) then
 
 	function ENT:Toggle(client)
 		if (self.nextUseTime > CurTime()) then
-			return false
+			return
 		end
 
-		if ((!client:IsCombine() and client:Team() != FACTION_CAB) and (self:GetLockMode() == 2 and (!table.HasValue(client:GetItems(), "worker_card"))) and (self:GetLockMode() == 3 and (!table.HasValue(client:GetItems(), "union_card")))) then
+		local inventory = client:GetCharacter():GetInventory()
+
+		if (!client:IsCombine() and (self:GetLockMode() == 1 or (self:GetLockMode() == 2 and (!inventory:HasItem("worker_card"))) or (self:GetLockMode() == 3 and (!inventory:HasItem("union_card"))))) then
 			self:DisplayError()
 			self.nextUseTime = CurTime() + 2
 
-			return false
+			return
 		end
 
 		self:SetLocked(!self:GetLocked())
