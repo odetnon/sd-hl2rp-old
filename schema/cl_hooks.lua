@@ -78,6 +78,12 @@ function Schema:BuildBusinessMenu(panel)
 	return bHasItems
 end
 
+function Schema:ShouldShowPlayerOnScoreboard(client)
+	if (LocalPlayer():Team() != FACTION_OTA and client:Team() == FACTION_OTA) then
+		return false
+	end
+end
+
 local COLOR_BLACK_WHITE = {
 	["$pp_colour_addr"] = 0,
 	["$pp_colour_addg"] = 0,
