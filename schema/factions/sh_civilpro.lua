@@ -5,7 +5,7 @@ FACTION.color = Color(50, 100, 150)
 FACTION.models = {"models/cultist/hl_a/metropolice/metrocop.mdl"}
 FACTION.runSounds = {[0] = "NPC_MetroPolice.RunFootstepLeft", [1] = "NPC_MetroPolice.RunFootstepRight"}
 FACTION.bAllowDatafile = true
-FACTION.factionRecognized = {
+FACTION.factionRecognised = {
 	["civilpro"] = true
 }
 FACTION.channels = {
