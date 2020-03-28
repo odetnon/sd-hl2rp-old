@@ -20,6 +20,7 @@ ix.anim.SetModelClass("models/bloocobalt/combine/combine_s.mdl", "overwatch")
 ix.anim.SetModelClass("models/cultist/hl_a/metropolice/npc/metrocop.mdl", "metrocop")
 ix.anim.SetModelClass("models/cultist/hl_a/worker/hazmat_2/npc/hazmat_2.mdl", "male_citizen")
 ix.anim.SetModelClass("models/cultist/hl_a/worker/hazmat_1/npc/hazmat_1.mdl", "male_citizen")
+ix.anim.SetModelClass("models/cultist/hl_a/combine_commander/npc/combine_commander.mdl", "overwatch")
 
 do
 	local CLASS = {}
