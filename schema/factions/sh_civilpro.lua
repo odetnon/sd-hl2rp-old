@@ -23,7 +23,7 @@ function FACTION:OnCharacterCreated(client, character)
 end
 
 function FACTION:GetDefaultName(client)
-	return "c17:00.TAGLINE-0", true
+	return "CP:00.TAGLINE-0", true
 end
 
 FACTION_CP = FACTION.index
