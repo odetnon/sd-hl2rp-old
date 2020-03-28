@@ -6,7 +6,7 @@ FACTION.models = {
 	"models/bloocobalt/combine/combine_s.mdl",
 	"models/bloocobalt/combine/combine_e.mdl"
 }
-FACTION.factionRecognised = {
+FACTION.factionRecognized = {
 	["civilpro"] = true,
 	["ota"] = true
 }
