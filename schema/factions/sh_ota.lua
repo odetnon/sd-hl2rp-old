@@ -2,7 +2,7 @@
 FACTION.name = "Overwatch Transhuman Arm"
 FACTION.description = ""
 FACTION.color = Color(200, 0, 0)
-FACTION.models = {"models/bloocobalt/combine/combine_s.mdl"}
+FACTION.models = {"models/cultist/hl_a/vannila_combine/npc/combine_soldier.mdl"}
 FACTION.factionRecognized = {
 	["civilpro"] = true,
 	["ota"] = true
