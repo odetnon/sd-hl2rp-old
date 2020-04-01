@@ -49,6 +49,18 @@ function Schema:PlayerLoadedCharacter(client, character, oldCharacter)
 	end
 end
 
+function Schema:CharacterVarChanged(character, key, oldValue, value)
+	local client = character:GetPlayer()
+
+	if (key == "name") then
+		local factionTable = ix.faction.Get(client:Team())
+
+		if (factionTable.OnNameChanged) then
+			factionTable:OnNameChanged(client, oldValue, value)
+		end
+	end
+end
+
 function Schema:PlayerFootstep(client, position, foot, soundName, volume)
 	local factionTable = ix.faction.Get(client:Team())
 
