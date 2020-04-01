@@ -1,5 +1,5 @@
 
-FACTION.name = "Civil Worker's Union"
+FACTION.name = "Civil Workers Union"
 FACTION.description = ""
 FACTION.color = Color(150, 125, 100)
 FACTION.bAllowDatafile = true
