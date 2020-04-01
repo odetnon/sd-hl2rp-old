@@ -26,4 +26,25 @@ function FACTION:GetDefaultName(client)
 	return "CP:00.TAGLINE-0", true
 end
 
+function FACTION:OnNameChanged(client, oldValue, value)
+	local character = client:GetCharacter()
+
+	if (!Schema:IsCombineRank(oldValue, "RCT") and Schema:IsCombineRank(value, "RCT")) then
+		character:JoinClass(CLASS_MPR)
+
+	elseif (!Schema:IsCombineRank(oldValue, "RL") and Schema:IsCombineRank(value, "RL")) then
+		character:JoinClass(CLASS_EMP)
+	elseif (!Schema:IsCombineRank(oldValue, "HC") and Schema:IsCombineRank(value, "HC")) then
+		character:JoinClass(CLASS_EMP)
+	elseif (!Schema:IsCombineRank(oldValue, "50") and Schema:IsCombineRank(value, "50")) then
+		character:JoinClass(CLASS_EMP)
+	elseif (!Schema:IsCombineRank(oldValue, "75") and Schema:IsCombineRank(value, "75")) then
+		character:JoinClass(CLASS_EMP)
+	end
+
+	if (!Schema:IsCombineRank(oldValue, "GHOST") and Schema:IsCombineRank(value, "GHOST")) then
+		character:SetModel("models/eliteghostcp.mdl")
+	end
+end
+
 FACTION_CP = FACTION.index
