@@ -22,6 +22,10 @@ ix.anim.SetModelClass("models/cultist/hl_a/worker/hazmat_2/npc/hazmat_2.mdl", "c
 ix.anim.SetModelClass("models/cultist/hl_a/worker/hazmat_1/npc/hazmat_1.mdl", "citizen_male")
 ix.anim.SetModelClass("models/cultist/hl_a/combine_commander/npc/combine_commander.mdl", "overwatch")
 
+function Schema:IsCombineRank(text, rank)
+	return string.find(text, "[%D+]"..rank.."[%D+]")
+end
+
 do
 	local CLASS = {}
 	CLASS.color = Color(150, 100, 100)
