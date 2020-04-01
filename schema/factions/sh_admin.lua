@@ -1,7 +1,7 @@
 
 FACTION.name = "Server Administration"
 FACTION.description = ""
-FACTION.color = Color(184, 61, 53)
+FACTION.color = Color(15, 200, 210)
 FACTION.isGloballyRecognized = true
 FACTION.noNeeds = true
 
