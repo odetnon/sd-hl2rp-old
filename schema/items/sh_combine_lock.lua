@@ -2,6 +2,7 @@
 ITEM.name = "Combine Lock"
 ITEM.description = "A combine made door lock"
 ITEM.model = "models/props_combine/combine_lock01.mdl"
+ITEM.height = 2
 
 ITEM.functions.Place = {
 	isMulti = true,
