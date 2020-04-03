@@ -1,4 +1,4 @@
-ITEM.name = "Pulse-Rifle Energy"
+ITEM.name = "Combine Rifle Cartridge"
 ITEM.model = "models/items/combine_rifle_cartridge01.mdl"
 ITEM.ammo = "ar2" -- type of the ammo
 ITEM.ammoAmount = 30 -- amount of the ammo
