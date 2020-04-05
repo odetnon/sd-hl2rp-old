@@ -26,7 +26,7 @@ if (SERVER) then
 		angles.r = 0
 		angles:RotateAroundAxis(angles:Up(), 270)
 
-		local entity = ents.Create("ix_xenforcefield")
+		local entity = ents.Create("ix_xenctrl_forcefield")
 		entity:SetPos(trace.HitPos + Vector(0, 0, 40))
 		entity:SetAngles(angles:SnapTo("y", 90))
 		entity:Spawn()
