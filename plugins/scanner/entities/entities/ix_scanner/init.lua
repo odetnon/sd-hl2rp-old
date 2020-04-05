@@ -137,7 +137,7 @@ function ENT:IsSpotlightOn()
 end
 
 function ENT:Initialize()
-    self:SetModel("models/hlvr/combine_scanner/hlvr_scanner_ref.mdl")
+    self:SetModel("models/Combine_Scanner.mdl")
     self:PhysicsInit(SOLID_VPHYSICS)
     self:SetSolid(SOLID_VPHYSICS)
     self:AddSolidFlags(FSOLID_NOT_STANDABLE)
