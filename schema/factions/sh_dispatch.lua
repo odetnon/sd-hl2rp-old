@@ -22,7 +22,7 @@ FACTION.noGas = true
 FACTION.noNeeds = true
 
 function FACTION:GetDefaultName(client)
-	return "CMB:AW.AI-"..math.random(1000, 9999), true
+	return "CMB:AW.SCN-"..math.random(1000, 9999), true
 end
 
 function FACTION:OnSpawn(client)
