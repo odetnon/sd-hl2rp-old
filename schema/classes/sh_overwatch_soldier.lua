@@ -6,7 +6,7 @@ function CLASS:OnSet(client)
 	local character = client:GetCharacter()
 
 	if (character) then
-		character:SetModel("models/bloocobalt/combine/combine_s.mdl")
+		character:SetModel("models/characters/combine_soldier/jqblk/combine_s.mdl")
 	end
 end
 
