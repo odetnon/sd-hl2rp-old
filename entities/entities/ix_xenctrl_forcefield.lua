@@ -166,12 +166,12 @@ if (SERVER) then
 			if (self:GetMode() > #MODES) then
 				self:SetMode(1)
 
-				self:SetBodygroup(0, 1)
-				self.dummy:SetBodygroup(0, 1)
+				self:SetBodygroup(0, 0)
+				self.dummy:SetBodygroup(0, 0)
 				self:EmitSound("npc/turret_floor/die.wav")
 			else
 				self:SetBodygroup(0, 1)
-				self.dummy:SetBodygroup(0, 0)
+				self.dummy:SetBodygroup(0, 1)
 			end
 
 			self:EmitSound("buttons/combine_button5.wav", 140, 100 + (self:GetMode() - 1) * 15)
