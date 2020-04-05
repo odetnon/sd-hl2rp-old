@@ -2,7 +2,7 @@
 FACTION.name = "Airwatch"
 FACTION.description = ""
 FACTION.color = Color(35, 60, 70)
-FACTION.models = {"models/hlvr/combine_scanner/hlvr_scanner_ref.mdl"}
+FACTION.models = {"models/Combine_Scanner.mdl"}
 FACTION.isGloballyRecognized = true
 FACTION.channels = {
 	["union"] = true,
