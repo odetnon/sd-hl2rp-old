@@ -21,22 +21,16 @@ ix.anim.SetModelClass("models/cultist/hl_a/metropolice/npc/metrocop.mdl", "metro
 ix.anim.SetModelClass("models/cultist/hl_a/worker/hazmat_2/npc/hazmat_2.mdl", "citizen_male")
 ix.anim.SetModelClass("models/cultist/hl_a/worker/hazmat_1/npc/hazmat_1.mdl", "citizen_male")
 ix.anim.SetModelClass("models/cultist/hl_a/combine_commander/npc/combine_commander.mdl", "overwatch")
-ix.anim.SetModelClass("models/humans/medic/female_01.mdl", "citizen_female")
-ix.anim.SetModelClass("models/humans/medic/female_02.mdl", "citizen_female")
-ix.anim.SetModelClass("models/humans/medic/female_03.mdl", "citizen_female")
-ix.anim.SetModelClass("models/humans/medic/female_04.mdl", "citizen_female")
-ix.anim.SetModelClass("models/humans/medic/female_06.mdl", "citizen_female")
-ix.anim.SetModelClass("models/humans/medic/female_07.mdl", "citizen_female")
-ix.anim.SetModelClass("models/humans/medic/male_01.mdl", "citizen_male")
-ix.anim.SetModelClass("models/humans/medic/male_02.mdl", "citizen_male")
-ix.anim.SetModelClass("models/humans/medic/male_03.mdl", "citizen_male")
-ix.anim.SetModelClass("models/humans/medic/male_04.mdl", "citizen_male")
-ix.anim.SetModelClass("models/humans/medic/male_05.mdl", "citizen_male")
-ix.anim.SetModelClass("models/humans/medic/male_06.mdl", "citizen_male")
-ix.anim.SetModelClass("models/humans/medic/male_07.mdl", "citizen_male")
-ix.anim.SetModelClass("models/humans/medic/male_08.mdl", "citizen_male")
-ix.anim.SetModelClass("models/humans/medic/male_09.mdl", "citizen_male")
 ix.anim.SetModelClass("models/player/female_02_suit.mdl", "citizen_female")
+
+for i = 1, 4 do
+    table.insert(ix.anim.SetModelClass( "models/humans/medic/female_0"..i..".mdl", "citizen_female"))
+	
+for i = 6, 7 do
+    table.insert(ix.anim.SetModelClass( "models/humans/medic/female_0"..i..".mdl", "citizen_female"))
+						
+for i = 1, 9 do
+    table.insert(ix.anim.SetModelClass( "models/humans/medic/male_0"..i..".mdl", "citizen_male"))
 
 function Schema:IsCombineRank(text, rank)
 	return string.find(text, "[%D+]"..rank.."[%D+]")
