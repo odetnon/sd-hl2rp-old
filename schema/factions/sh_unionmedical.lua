@@ -6,15 +6,15 @@ FACTION.models = {}
 FACTION.bAllowDatafile = true
 
 for i = 1, 4 do
-	table.insert(FACTION.models, "models/player/zelpa/clockwork/female_0"..i..".mdl")
+	table.insert(FACTION.models, "models/humans/medic/female_0"..i..".mdl")
 end
 
 for i = 6, 7 do
-	table.insert(FACTION.models, "models/player/zelpa/clockwork/female_0"..i..".mdl")
+	table.insert(FACTION.models, "models/humans/medic/female_0"..i..".mdl")
 end
 
-for i = 1, 10 do
-	table.insert(FACTION.models, "models/player/zelpa/clockwork/male_0"..i..".mdl")
+for i = 1, 9 do
+	table.insert(FACTION.models, "models/humans/medic/male_0"..i..".mdl")
 end
 
 function FACTION:OnCharacterCreated(client, character)
