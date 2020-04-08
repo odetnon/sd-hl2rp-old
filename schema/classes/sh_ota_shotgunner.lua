@@ -1,4 +1,4 @@
-CLASS.name = "Overwatch Shotgunner"
+CLASS.name = "Overwatch Captain"
 CLASS.faction = FACTION_OTA
 CLASS.isDefault = true
 
@@ -6,7 +6,7 @@ function CLASS:OnCanBe(client)
 	local name = client:Name()
 	local bStatus = false
 
-	for k, v in ipairs({ "MACE"}) do
+	for k, v in ipairs({ "OWC"}) do
 		if (Schema:IsCombineRank(name, v)) then
 			bStatus = true
 
