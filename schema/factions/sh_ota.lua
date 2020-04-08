@@ -27,7 +27,7 @@ FACTION.noGas = true
 FACTION.noNeeds = true
 
 function FACTION:GetDefaultName(client)
-	return "CMB:OTA.ECHO."..string.format("%05d", math.random(1, 99999)), true
+	return "OTA:OWS.ECHO."..string.format("%05d", math.random(1, 99999)), true
 end
 
 function FACTION:OnCharacterCreated(client, character)
