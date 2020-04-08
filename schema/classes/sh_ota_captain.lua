@@ -1,6 +1,6 @@
 CLASS.name = "Overwatch Captain"
 CLASS.faction = FACTION_OTA
-CLASS.isDefault = true
+CLASS.isDefault = false
 
 function CLASS:OnCanBe(client)
 	local name = client:Name()
