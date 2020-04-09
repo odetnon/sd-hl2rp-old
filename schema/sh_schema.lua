@@ -22,6 +22,8 @@ ix.anim.SetModelClass("models/cultist/hl_a/worker/hazmat_2/npc/hazmat_2.mdl", "c
 ix.anim.SetModelClass("models/cultist/hl_a/worker/hazmat_1/npc/hazmat_1.mdl", "citizen_male")
 ix.anim.SetModelClass("models/cultist/hl_a/combine_commander/npc/combine_commander.mdl", "overwatch")
 ix.anim.SetModelClass("models/player/female_02_suit.mdl", "citizen_female")
+ix.anim.SetModelClass("models/hlvr/characters/vortigaunt/vortigaunt_uncombined_hlvr.mdl", "vortigaunt")
+ix.anim.SetModelClass("models/hlvr/characters/vortigaunt/vortigaunt_hlvr.mdl", "vortigaunt")
 
 for i = 1, 4 do
     table.insert(ix.anim.SetModelClass( "models/humans/medic/female_0"..i..".mdl", "citizen_female"))
