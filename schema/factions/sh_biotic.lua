@@ -4,7 +4,7 @@ FACTION.description = ""
 FACTION.color = Color(100, 150, 0)
 FACTION.bAllowDatafile = true
 FACTION.models = {
-	"models/vortigaunt_slave.mdl"
+	"models/hlvr/characters/vortigaunt/vortigaunt_uncombined_hlvr.mdl"
 }
 
 function FACTION:GetDefaultName(client)
