@@ -10,7 +10,7 @@ function PLUGIN:CharacterLoaded(character)
 end
 
 function PLUGIN:Tick()
-	if (LocalPlayer():Alive() and IsValid(LocalPlayer()) and LocalPlayer():IsCombine()) then
+	if (IsValid(LocalPlayer()) and LocalPlayer():Alive() and LocalPlayer():IsCombine()) then
 		if (!self.nextRandomLine or CurTime() >= self.nextRandomLine) then
 			local index = math.random(1, #self.randomDisplayLines)
 
