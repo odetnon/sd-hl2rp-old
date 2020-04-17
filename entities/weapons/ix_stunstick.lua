@@ -11,7 +11,7 @@ end
 
 SWEP.Category = "HL2 RP"
 SWEP.Author = "Chessnut"
-SWEP.Instructions = "Primary Fire: Stun.\nALT + Primary Fire: Toggle stun.\nSecondary Fire: Push/Knock."
+SWEP.Instructions = "Primary Fire: Stun.\nSHIFT + Primary Fire: Toggle stun.\nSecondary Fire: Push/Knock."
 SWEP.Purpose = "Hitting things and knocking on doors."
 SWEP.Drop = false
 
@@ -152,7 +152,7 @@ function SWEP:PrimaryAttack()
 		return
 	end
 
-	if (self.Owner:KeyDown(IN_WALK)) then
+	if (self.Owner:KeyDown(IN_SPEED)) then
 		if (SERVER) then
 			self:SetActivated(!self:GetActivated())
 
