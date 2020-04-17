@@ -10,23 +10,21 @@ function PLUGIN:CharacterLoaded(character)
 end
 
 function PLUGIN:Tick()
-	if (IsValid(LocalPlayer()) then
-		if (LocalPlayer():IsCombine()) then
-			if (!self.nextRandomLine or CurTime() >= self.nextRandomLine) then
-				local index = math.random(1, #self.randomDisplayLines)
+	if (LocalPlayer():IsCombine()) then
+		if (!self.nextRandomLine or CurTime() >= self.nextRandomLine) then
+			local index = math.random(1, #self.randomDisplayLines)
 
-				local text = self.randomDisplayLines[index]
+			local text = self.randomDisplayLines[index]
 
-				if (istable(text)) then
-					text = text[2](text[1])
-				end
+			if (istable(text)) then
+				text = text[2](text[1])
+			end
 
-				if (text and self.lastRandomDisplayLine != index) then
-					self:AddCombineDisplayMessage(text)
+			if (text and self.lastRandomDisplayLine != index) then
+				self:AddCombineDisplayMessage(text)
 
-					self.lastRandomDisplayLine = index
-					self.nextRandomLine = CurTime() + 3
-				end
+				self.lastRandomDisplayLine = index
+				self.nextRandomLine = CurTime() + 3
 			end
 		end
 	end
