@@ -26,15 +26,15 @@ ix.anim.SetModelClass("models/hlvr/characters/vortigaunt/vortigaunt_uncombined_h
 ix.anim.SetModelClass("models/hlvr/characters/vortigaunt/vortigaunt_hlvr.mdl", "vortigaunt")
 
 for i = 1, 4 do
-    table.insert(ix.anim.SetModelClass( "models/humans/medic/female_0"..i..".mdl", "citizen_female"))
+	ix.anim.SetModelClass( "models/humans/medic/female_0"..i..".mdl", "citizen_female" )
 end
 	
 for i = 6, 7 do
-    table.insert(ix.anim.SetModelClass( "models/humans/medic/female_0"..i..".mdl", "citizen_female"))
+	ix.anim.SetModelClass( "models/humans/medic/female_0"..i..".mdl", "citizen_female" )
 end
 						
 for i = 1, 9 do
-    table.insert(ix.anim.SetModelClass( "models/humans/medic/male_0"..i..".mdl", "citizen_male"))
+	ix.anim.SetModelClass( "models/humans/medic/male_0"..i..".mdl", "citizen_male" )
 end
 
 function Schema:IsCombineRank(text, rank)
