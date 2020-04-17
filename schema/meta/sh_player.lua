@@ -2,9 +2,21 @@
 local playerMeta = FindMetaTable("Player")
 
 function playerMeta:IsCombine()
-	return IsValid(self) and (self:Team() == FACTION_CP or self:Team() == FACTION_OTA or self:Team() == FACTION_DISP)
+	if (!IsValid(self)) then
+		return
+	end
+	
+	local team = self:Team()
+
+	return team == FACTION_CP or team == FACTION_OTA or team == FACTION_DISP
 end
 
 function playerMeta:IsDispatch()
-	return IsValid(self) and (self:Team() == FACTION_DISP)
+	if (!IsValid(self)) then
+		return
+	end
+	
+	local team = self:Team()
+
+	return team == FACTION_DISP
 end
