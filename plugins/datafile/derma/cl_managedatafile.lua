@@ -4,9 +4,9 @@ local PLUGIN = PLUGIN
 -- Datafile management panel. Allows one to remove/edit entries.
 local PANEL = {}
 
-function PANEL:Init() 
+function PANEL:Init()
 	self:SetTitle("")
-	
+
 	self:SetSize(700, 400)
 	self:Center()
 
@@ -21,7 +21,7 @@ function PANEL:Init()
 	self.List:AddColumn("sc")
 	self.List:AddColumn("poster")
 
-	self.Delete = vgui.Create("cwDfButton", self)
+	self.Delete = vgui.Create("ixDfButton", self)
 	self.Delete:SetText("Delete Entry")
 	self.Delete:SetMetroColor(Color(200, 50, 0, 255))
 	self.Delete:Dock(BOTTOM)
@@ -68,4 +68,4 @@ function PANEL:PopulateEntries(target, datafile)
   	end
 end
 
-vgui.Register("cwDfManageFile", PANEL, "DFrame")
+vgui.Register("ixDfManageFile", PANEL, "DFrame")

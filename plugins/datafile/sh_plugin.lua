@@ -13,9 +13,9 @@ ix.util.Include("sh_commands.lua")
 
 -- All the categories possible. Yes, the names are quite annoying.
 PLUGIN.Categories = {
-	["med"] = true,
-	["union"] = true,
-	["civil"] = true
+	["med"] = true,     -- Medical note.
+	["union"] = true,   -- Union (CWU, WI, UP) type note.
+	["civil"] = true    -- Civil Protection/CTA type note.
 }
 
 DATAFILE_PERMISSION_NONE = 0
@@ -26,16 +26,19 @@ DATAFILE_PERMISSION_ELEVATED = 4
 
 -- Permissions for the numerous factions.
 PLUGIN.Permissions = {
-	["Airwatch"] = DATAFILE_PERMISSION_ELEVATED,
+	["Overwatch"] = DATAFILE_PERMISSION_ELEVATED,
 
-	["Overwatch Transhuman Arm"] = DATAFILE_PERMISSION_ELEVATED,
-	["Civil Authority"] = DATAFILE_PERMISSION_FULL,
+	["Combine Transhuman Arm"] = DATAFILE_PERMISSION_FULL,
+	["Overwatch Transhuman Arm"] = DATAFILE_PERMISSION_FULL,
+	["Administrator"] = DATAFILE_PERMISSION_FULL,
+	["Civil Administration Board"] = DATAFILE_PERMISSION_FULL,
 	["Civil Protection"] = DATAFILE_PERMISSION_FULL,
 
 	["Server Administration"] = DATAFILE_PERMISSION_MEDIUM,
 
 	["Civil Worker's Union"] = DATAFILE_PERMISSION_MINOR,
-	["Union Medical"] = DATAFILE_PERMISSION_MINOR,
+	["Willard Industries"] = DATAFILE_PERMISSION_MINOR,
+	["Unity Party"] = DATAFILE_PERMISSION_MINOR,
 
 	["Citizen"] = DATAFILE_PERMISSION_NONE
 }
@@ -65,7 +68,7 @@ PLUGIN.Default = {
 	},
 	CivilianData = {
         [1] = {
-           	category = "union", // med, union, civil
+           	category = "union", -- med, union, civil
             text = "TRANSFERRED TO DISTRICT WORKFORCE.",
             date = os.date("%H:%M:%S - %d/%m/%Y", os.time()),
             points = "0",
@@ -74,7 +77,7 @@ PLUGIN.Default = {
 	},
 	CombineData = {
         [1] = {
-           	category = "union", // med, union, civil
+           	category = "union", -- med, union, civil
             text = "INSTATED AS CIVIL PROTECTOR.",
             date = os.date("%H:%M:%S - %d/%m/%Y", os.time()),
             points = "0",

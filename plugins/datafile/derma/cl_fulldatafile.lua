@@ -8,7 +8,6 @@ local colours = {
     blue = Color(41, 128, 185, 255),
 }
 
-
 -- Main datafile panel.
 local PANEL = {}
 
@@ -22,7 +21,7 @@ function PANEL:Init()
     self.Status = ""
 
     -- Creation of all elements, text is set in the population functions.
-    self.TopPanel = vgui.Create("cwDfPanel", self)
+    self.TopPanel = vgui.Create("ixDfPanel", self)
 
     -- TODO: Add the CID here!
     self.NameLabel = vgui.Create("DLabel", self.TopPanel)
@@ -32,47 +31,47 @@ function PANEL:Init()
     self.NameLabel:DockMargin(5, 5, 0, 0)
     self.NameLabel:SizeToContents(true)
 
-    self.InfoPanel = vgui.Create("cwDfInfoPanel", self.TopPanel)
+    self.InfoPanel = vgui.Create("ixDfInfoPanel", self.TopPanel)
 
-    self.HeaderPanel = vgui.Create("cwDfHeaderPanel", self)
-    self.Entries = vgui.Create("cwDfEntriesPanel", self)
+    self.HeaderPanel = vgui.Create("ixDfHeaderPanel", self)
+    self.Entries = vgui.Create("ixDfEntriesPanel", self)
 
     -- Lower button panel.
-    self.dButtons = vgui.Create("cwDfPanel", self)
+    self.dButtons = vgui.Create("ixDfPanel", self)
     self.dButtons:Dock(BOTTOM)
     self.dButtons:SetTall(35)
 
     -- Upper button panel.
-    self.uButtons = vgui.Create("cwDfPanel", self)
+    self.uButtons = vgui.Create("ixDfPanel", self)
     self.uButtons:Dock(BOTTOM)
     self.uButtons:SetTall(35)
 
     -- Upper buttons. Population will be done below.
-    self.uLeftButton = vgui.Create("cwDfButton", self.uButtons)
+    self.uLeftButton = vgui.Create("ixDfButton", self.uButtons)
     self.uLeftButton:SetText("ADD NOTE")
     self.uLeftButton:SetMetroColor(colours.blue)
     self.uLeftButton:Dock(LEFT)
 
-    self.uMiddleButton = vgui.Create("cwDfButton", self.uButtons)
+    self.uMiddleButton = vgui.Create("ixDfButton", self.uButtons)
     self.uMiddleButton:SetText("ADD CIVIL RECORD")
     self.uMiddleButton:SetMetroColor(colours.red)
     self.uMiddleButton:Dock(FILL)
 
-    self.uRightButton = vgui.Create("cwDfButton", self.uButtons)
+    self.uRightButton = vgui.Create("ixDfButton", self.uButtons)
     self.uRightButton:SetText("ADD MEDICAL RECORD")
     self.uRightButton:SetMetroColor(colours.green)
     self.uRightButton:Dock(RIGHT)
 
     -- Bottom buttons.
-    self.dLeftButton = vgui.Create("cwDfButton", self.dButtons)
+    self.dLeftButton = vgui.Create("ixDfButton", self.dButtons)
     self.dLeftButton:SetText("UPDATE LAST SEEN")
     self.dLeftButton:Dock(LEFT)
 
-    self.dMiddleButton = vgui.Create("cwDfButton", self.dButtons)
+    self.dMiddleButton = vgui.Create("ixDfButton", self.dButtons)
     self.dMiddleButton:SetText("CHANGE CIVIL STATUS")
     self.dMiddleButton:Dock(FILL)
 
-    self.dRightButton = vgui.Create("cwDfButton", self.dButtons)
+    self.dRightButton = vgui.Create("ixDfButton", self.dButtons)
     self.dRightButton:SetText("ADD BOL")
     self.dRightButton:Dock(RIGHT)
 
@@ -91,15 +90,15 @@ function PANEL:PopulateDatafile(target, datafile)
         local color = datafile[k].poster[3]
 
         if (datafile[k].category == "union") then
-            local entry = vgui.Create("cwDfEntry", self.Entries.Left)
+            local entry = vgui.Create("ixDfEntry", self.Entries.Left)
             entry:SetEntryText(text, date, "~ " .. poster, points, color)
 
         elseif (datafile[k].category == "civil") then
-            local entry = vgui.Create("cwDfEntry", self.Entries.Middle)
+            local entry = vgui.Create("ixDfEntry", self.Entries.Middle)
             entry:SetEntryText(text, date, "~ " .. poster, points, color)
 
         elseif (datafile[k].category == "med") then
-            local entry = vgui.Create("cwDfEntry", self.Entries.Right)
+            local entry = vgui.Create("ixDfEntry", self.Entries.Right)
             entry:SetEntryText(text, date, "~ " .. poster, points, color)
         end
     end
@@ -149,30 +148,32 @@ function PANEL:PopulateGenericData(target, datafile, GenericData)
 
     self.dRightButton.DoClick = function()
         net.Start("SetBOL")
-            net.WriteTable({target})
+            net.WriteEntity(target)
         net.SendToServer()
+
         PLUGIN:Refresh(target)
     end
 
     self.dLeftButton.DoClick = function()
         net.Start("UpdateLastSeen")
-            net.WriteTable({target})
+            net.WriteEntity(target)
         net.SendToServer()
+
         PLUGIN:Refresh(target)
     end
 
     self.uLeftButton.DoClick = function()
-        local entryPanel = vgui.Create("cwDfNoteEntry")
+        local entryPanel = vgui.Create("ixDfNoteEntry")
         entryPanel:SendInformation(target)
     end
 
     self.uMiddleButton.DoClick = function()
-        local entryPanel = vgui.Create("cwDfCivilEntry")
+        local entryPanel = vgui.Create("ixDfCivilEntry")
         entryPanel:SendInformation(target)
     end
 
     self.uRightButton.DoClick = function()
-        local entryPanel = vgui.Create("cwDfMedicalEntry")
+        local entryPanel = vgui.Create("ixDfMedicalEntry")
         entryPanel:SendInformation(target)
     end
 
@@ -250,7 +251,7 @@ function PANEL:Paint(w, h)
     surface.DrawOutlinedRect(0, 0, w, h)
 end
 
-vgui.Register("cwFullDatafile", PANEL, "DFrame")
+vgui.Register("ixFullDatafile", PANEL, "DFrame")
 
 
 -- Top panel/darker panel.
@@ -266,7 +267,7 @@ function PANEL:Paint(w, h)
     surface.DrawRect(0, 0, w, h)
 end
 
-vgui.Register("cwDfPanel", PANEL, "DPanel")
+vgui.Register("ixDfPanel", PANEL, "DPanel")
 
 
 -- Header panel. Shows what category each tab is in.
@@ -313,7 +314,7 @@ function PANEL:Paint(w, h)
     surface.DrawRect(0, 0, w, h)
 end
 
-vgui.Register("cwDfHeaderPanel", PANEL, "DPanel")
+vgui.Register("ixDfHeaderPanel", PANEL, "DPanel")
 
 -- Panel that will contain the entries & the 3 scroll bars.
 local PANEL = {}
@@ -321,13 +322,13 @@ local PANEL = {}
 function PANEL:Init()
     self:Dock(FILL)
 
-    self.Left = vgui.Create("cwDfScrollPanel", self)
+    self.Left = vgui.Create("ixDfScrollPanel", self)
     self.Left:Dock(LEFT)
 
-    self.Middle = vgui.Create("cwDfScrollPanel", self)
+    self.Middle = vgui.Create("ixDfScrollPanel", self)
     self.Middle:Dock(FILL)
 
-    self.Right = vgui.Create("cwDfScrollPanel", self)
+    self.Right = vgui.Create("ixDfScrollPanel", self)
     self.Right:Dock(RIGHT)
 end
 
@@ -342,7 +343,7 @@ function PANEL:Paint(w, h)
     surface.DrawRect(0, 0, w, h)
 end
 
-vgui.Register("cwDfEntriesPanel", PANEL, "DPanel")
+vgui.Register("ixDfEntriesPanel", PANEL, "DPanel")
 
 -- Darker scroll panel.
 local PANEL = {}
@@ -358,7 +359,7 @@ function PANEL:Init()
         surface.SetDrawColor(Color(38, 38, 38, 255))
         surface.DrawRect(0, 0, w, h)
     end
-    
+
     function self.SBar.btnGrip:Paint(w, h)
         surface.SetDrawColor(Color(47, 47, 47, 255))
         surface.DrawRect(0, 0, w, h)
@@ -375,7 +376,7 @@ function PANEL:Init()
     end
 end
 
-vgui.Register("cwDfScrollPanel", PANEL, "DScrollPanel")
+vgui.Register("ixDfScrollPanel", PANEL, "DScrollPanel")
 
 -- Darker buttons.
 local PANEL = {}
@@ -410,7 +411,7 @@ function PANEL:OnCursorExited(w, h)
     self.ButtonColor = Color(47, 47, 47, 255)
 end
 
-vgui.Register("cwDfButton", PANEL, "DButton")
+vgui.Register("ixDfButton", PANEL, "DButton")
 
 -- Entry for one of the scroll panels.
 local PANEL = {}
@@ -483,9 +484,9 @@ function PANEL:SetEntryText(noteText, dateText, posterText, pointsText, posterCo
     end
 
     self:SetTall(60 + (string.len(self.Text:GetText()) / 28) * 11)
-end    
+end
 
-vgui.Register("cwDfEntry", PANEL, "DPanel")
+vgui.Register("ixDfEntry", PANEL, "DPanel")
 
 -- Info panel. Panel below the name of the player.
 local PANEL = {}
@@ -560,4 +561,4 @@ function PANEL:Paint()
     return false
 end
 
-vgui.Register("cwDfInfoPanel", PANEL, "DPanel")
+vgui.Register("ixDfInfoPanel", PANEL, "DPanel")

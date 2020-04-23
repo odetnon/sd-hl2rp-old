@@ -2,8 +2,8 @@
 local PLUGIN = PLUGIN
 
 -- Create the table for the datafile.
-hook.Add("DatabaseConnected", "datafile.DatabaseConnected", function()
-	local query = mysql:Create("datafile")
+function PLUGIN:LoadData()
+	local query = mysql:Create(ix.config.Get("mysqlDatafileTable", "datafile"))
 		query:Create("_Key", "INT(11) UNSIGNED NOT NULL AUTO_INCREMENT")
 		query:Create("_CharacterID", "VARCHAR(50) NOT NULL")
 		query:Create("_CharacterName", "VARCHAR(150) NOT NULL")
@@ -13,36 +13,36 @@ hook.Add("DatabaseConnected", "datafile.DatabaseConnected", function()
 		query:Create("_Datafile", "TEXT NOT NULL")
 		query:PrimaryKey("_Key")
 	query:Execute()
-end)
+end
 
 -- Check if the player has a datafile or not. If not, create one.
-function PLUGIN:PostPlayerLoadout(player)
-	local bHasDatafile = self:HasDatafile(player)
+function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
+	local bHasDatafile = self:HasDatafile(client)
 
 	-- Nil because the bHasDatafile is not in every player their character data.
-	if ((!bHasDatafile || bHasDatafile == nil) && !self:IsRestrictedFaction(player)) then
-		self:CreateDatafile(player)
+	if ((!bHasDatafile || bHasDatafile == nil) && !self:IsRestrictedFaction(client)) then
+		self:CreateDatafile(client)
 	end
 
 	-- load the datafile again with the new changes.
-	self:LoadDatafile(player)
+	self:LoadDatafile(client)
 end
 
 -- Function to load the datafile on the player's character. Used after updating something in the MySQL.
-function PLUGIN:LoadDatafile(player)
-	if (IsValid(player)) then
+function PLUGIN:LoadDatafile(client)
+	if (IsValid(client)) then
 		local schemaFolder = Schema.folder
-		local character = player:GetCharacter()
+		local character = client:GetCharacter()
 
-		local queryObj = mysql:Select("datafile")
+		local queryObj = mysql:Select(ix.config.Get("mysqlDatafileTable", "datafile"))
 			queryObj:Where("_CharacterID", character:GetID())
-			queryObj:Where("_SteamID", player:SteamID())
+			queryObj:Where("_SteamID", client:SteamID())
 			queryObj:Where("_Schema", schemaFolder)
 			queryObj:Callback(function(result, status, lastID)
-				if (!IsValid(player)) then return end
+				if (!IsValid(client)) then return end
 
 				if (result) then
-					player.ixDatafile = {
+					client.ixDatafile = {
 						GenericData = util.JSONToTable(result[1]._GenericData),
 						Datafile = util.JSONToTable(result[1]._Datafile)
 					}
@@ -53,20 +53,20 @@ function PLUGIN:LoadDatafile(player)
 end
 
 -- Create a datafile for the player.
-function PLUGIN:CreateDatafile(player)
-	if (IsValid(player)) then
+function PLUGIN:CreateDatafile(client)
+	if (IsValid(client)) then
 		local schemaFolder = Schema.folder
-		local character = player:GetCharacter()
-		local steamID = player:SteamID()
+		local character = client:GetCharacter()
+		local steamID = client:SteamID()
 
 		local defaultDatafile = self.Default.CivilianData
 
-		if (player:IsCombine()) then
+		if (client:IsCombine()) then
 			defaultDatafile = self.Default.CombineData
 		end
 
 		-- Set all the values.
-		local insertObj = mysql:Insert("datafile")
+		local insertObj = mysql:Insert(ix.config.Get("mysqlDatafileTable", "datafile"))
 			insertObj:Insert("_CharacterID", character:GetID())
 			insertObj:Insert("_CharacterName", character:GetName())
 			insertObj:Insert("_SteamID", steamID)
@@ -74,31 +74,31 @@ function PLUGIN:CreateDatafile(player)
 			insertObj:Insert("_GenericData", util.TableToJSON(PLUGIN.Default.GenericData))
 			insertObj:Insert("_Datafile", util.TableToJSON(defaultDatafile))
 			insertObj:Callback(function(result, status, lastID)
-				PLUGIN:SetHasDatafile(player, true)
+				PLUGIN:SetHasDatafile(client, true)
 			end)
 		insertObj:Execute()
 	end
 end
 
 -- Sets whether as character has a datafile.
-function PLUGIN:SetHasDatafile(player, bhasDatafile)
-	player:GetChar():SetData("HasDatafile", bhasDatafile)
+function PLUGIN:SetHasDatafile(client, bhasDatafile)
+	client:GetCharacter():SetData("HasDatafile", bhasDatafile)
 end
 
 -- Returns true if the player has a datafile.
-function PLUGIN:HasDatafile(player)
-	return player:GetChar():GetData("HasDatafile", false)
+function PLUGIN:HasDatafile(client)
+	return client:GetCharacter():GetData("HasDatafile", false)
 end
 
 -- Datafile handler. Decides what to do when a player types /Datafile John Doe.
-function PLUGIN:HandleDatafile(player, target)
-	local playerValue = self:ReturnPermission(player)
+function PLUGIN:HandleDatafile(client, target)
+	local playerValue = self:ReturnPermission(client)
 	local targetValue = self:ReturnPermission(target)
-	local bTargetIsRestricted, restrictedText = self:IsRestricted(player)
+	local bTargetIsRestricted, restrictedText = self:IsRestricted(client)
 
 	if (playerValue >= targetValue) then
 		if (playerValue == DATAFILE_PERMISSION_NONE) then
-			player:Notify("You are not authorized to access this datafile.")
+			client:Notify("You are not authorized to access this datafile.")
 
 			return false
 		end
@@ -108,7 +108,7 @@ function PLUGIN:HandleDatafile(player, target)
 
 		if (playerValue == DATAFILE_PERMISSION_MINOR) then
 			if (bTargetIsRestricted) then
-				player:Notify("This datafile has been restricted access denied. REASON: " .. restrictedText)
+				client:Notify("This datafile has been restricted access denied. REASON: " .. restrictedText)
 
 				return false
 			end
@@ -120,92 +120,89 @@ function PLUGIN:HandleDatafile(player, target)
 			end
 
 			net.Start("CreateRestrictedDatafile")
-				net.WriteTable({target, GenericData, datafile})
-			net.Send(player)
+				net.WriteEntity(target)
+				net.WriteTable(GenericData)
+				net.WriteTable(datafile)
+			net.Send(client)
 		else
 			net.Start("CreateFullDatafile")
-				net.WriteTable({target, GenericData, datafile})
-			net.Send(player)
+				net.WriteEntity(target)
+				net.WriteTable(GenericData)
+				net.WriteTable(datafile)
+			net.Send(client)
 		end
 
 	elseif (playerValue < targetValue) then
-		player:Notify("You are not authorized to access this datafile.")
+		client:Notify("You are not authorized to access this datafile.")
 
 		return false
 	end
 end
 
--- Datastream
+-- net
 
 -- Update the last seen.
-net.Receive("UpdateLastSeen", function(len, player)
-	local data = net.ReadTable()
-	local target = data[1]
+net.Receive("UpdateLastSeen", function(len, client)
+	local target = net.ReadEntity()
 
 	PLUGIN:UpdateLastSeen(target)
 end)
 
 -- Update the civil status.
-net.Receive("UpdateCivilStatus", function(len, player)
-	local data = net.ReadTable()
-	local target = data[1]
-	local civilStatus = data[2]
+net.Receive("UpdateCivilStatus", function(len, client)
+	local target = net.ReadEntity()
+	local civilStatus = net.ReadString()
 
-	PLUGIN:SetCivilStatus(target, player, civilStatus)
+	PLUGIN:SetCivilStatus(target, client, civilStatus)
 end)
 
 -- Add a new entry.
-net.Receive("AddDatafileEntry", function(len, player)
-	local data = net.ReadTable()
-	local target = data[1]
-	local category = data[2]
-	local text = data[3]
-	local points = data[4]
+net.Receive("AddDatafileEntry", function(len, client)
+	local target = net.ReadEntity()
+	local category = net.ReadString()
+	local text = net.ReadString()
+	local points = net.ReadString()
 
-	PLUGIN:AddEntry(category, text, points, target, player, false)
+	PLUGIN:AddEntry(category, text, points, target, client, false)
 end)
 
 -- Add/remove a BOL.
-net.Receive("SetBOL", function(len, player)
-	local data = net.ReadTable()
-	local target = data[1]
-	local bHasBOL = PLUGIN:ReturnBOL(player)
+net.Receive("SetBOL", function(len, client)
+	local target = net.ReadEntity()
+	local bHasBOL = PLUGIN:ReturnBOL(target)
 
 	if (bHasBOL) then
-		PLUGIN:SetBOL(false, "", target, player)
+		PLUGIN:SetBOL(false, "", target, client)
 	else
-		PLUGIN:SetBOL(true, "", target, player)
+		PLUGIN:SetBOL(true, "", target, client)
 	end
 end)
 
 -- Send the points of the player back to the user.
-net.Receive("RequestPoints", function(len, player)
-	local data = net.ReadTable()
-	local target = data[1]
+net.Receive("RequestPoints", function(len, client)
+	local target = net.ReadEntity()
 
-	if (PLUGIN:ReturnPermission(player) == DATAFILE_PERMISSION_MINOR and (PLUGIN:ReturnPermission(target) == DATAFILE_PERMISSION_NONE or PLUGIN:ReturnPermission(target) == DATAFILE_PERMISSION_MINOR)) then
+	if (PLUGIN:ReturnPermission(client) == DATAFILE_PERMISSION_MINOR and (PLUGIN:ReturnPermission(target) == DATAFILE_PERMISSION_NONE or PLUGIN:ReturnPermission(target) == DATAFILE_PERMISSION_MINOR)) then
 		net.Start("SendPoints")
-			net.WriteTable({PLUGIN:ReturnPoints(target)})
-		net.Send(player)
+			net.WriteString(PLUGIN:ReturnPoints(target))
+		net.Send(client)
 	end
 end)
 
 -- Remove a line from someone their datafile.
-net.Receive("RemoveDatafileLine", function(len, player)
-	local data = net.ReadTable()
-	local target = data[1]
-	local key = data[2]
-	local date = data[3]
-	local category = data[4]
-	local text = data[5]
+net.Receive("RemoveDatafileLine", function(len, client)
+	local target = net.ReadEntity()
+	local key = net.ReadUInt(8)
+	local date = net.ReadString()
+	local category = net.ReadString()
+	local text = net.ReadString()
 
-	PLUGIN:RemoveEntry(player, target, key, date, category, text)
+	PLUGIN:RemoveEntry(client, target, key, date, category, text)
 end)
 
 -- Refresh the active datafile panel of a player.
-net.Receive("RefreshDatafile", function(len, player)
-	local data = net.ReadTable()
-	local target = data[1]
+net.Receive("RefreshDatafile", function(len, client)
+	local target = net.ReadEntity()
 
-	PLUGIN:HandleDatafile(player, target)
+	PLUGIN:HandleDatafile(client, target)
 end)

@@ -6,15 +6,15 @@ ix.command.Add("Datafile", {
 	arguments = {
 		ix.type.player,
 	},
-	OnRun = function(self, player, target)
+	OnRun = function(self, client, target)
 	    if (target) then
 	        if (PLUGIN:IsRestrictedFaction(target) or !PLUGIN:HasDatafile(target)) then
-            	player:Notify("This datafile does not exist.")
+            	client:Notify("This datafile does not exist.")
         	else
-            	PLUGIN:HandleDatafile(player, target)
+            	PLUGIN:HandleDatafile(client, target)
        	 	end
 	    else
-	        player:Notify("This datafile does not exist.")
+	        client:Notify("This datafile does not exist.")
 	    end
 	end
 })
@@ -25,11 +25,11 @@ ix.command.Add("ClearDatafile", {
 	arguments = {
 		ix.type.player,
 	},
-	OnRun = function(self, player, target)
+	OnRun = function(self, client, target)
 		if (target) then
         	PLUGIN:ClearDatafile(target)
    		else
-        	player:Notify("You have entered an invalid character.")
+        	client:Notify("You have entered an invalid character.")
     	end
 	end
 })
@@ -39,19 +39,20 @@ ix.command.Add("ManageDatafile", {
 	arguments = {
 		ix.type.player,
 	},
-	OnRun = function(self, player, target)
+	OnRun = function(self, client, target)
 		if (target) then
-			local permission = PLUGIN:ReturnPermission(player)
+			local permission = PLUGIN:ReturnPermission(client)
 
        		if (permission == DATAFILE_PERMISSION_ELEVATED) then
 	       		net.Start("CreateManagementPanel")
-	       			net.WriteTable({target, PLUGIN:ReturnDatafile(target)})
-	       		net.Send(player)
+	       			net.WriteEntity(target)
+	       			net.WriteTable(PLUGIN:ReturnDatafile(target))
+	       		net.Send(client)
 	       	else
-	       	    player:Notify("You are not authorized to manage this datafile.")
+	       	    client:Notify("You are not authorized to manage this datafile.")
 	       	end
 	    else
-	        player:Notify("This datafile does not exist.")
+	        client:Notify("This datafile does not exist.")
 	    end
 	end
 })
@@ -62,7 +63,7 @@ ix.command.Add("RestrictDatafile", {
 		ix.type.player,
 		bit.bor(ix.type.string, ix.type.optional),
 	},
-	OnRun = function(self, player, target, reason)
+	OnRun = function(self, client, target, reason)
 	    local text = reason
 
 	    if (!text or text == "") then
@@ -70,21 +71,21 @@ ix.command.Add("RestrictDatafile", {
 	    end
 
 	    if (target) then
-	    	if (PLUGIN:ReturnPermission(player) >= DATAFILE_PERMISSION_FULL) then
+	    	if (PLUGIN:ReturnPermission(client) >= DATAFILE_PERMISSION_FULL) then
 	    		if (text) then
-		        	PLUGIN:SetRestricted(true, text, target, player)
+		        	PLUGIN:SetRestricted(true, text, target, client)
 
-		        	player:Notify(target:Name() .. "'s file has been restricted.")
+		        	client:Notify(target:Name() .. "'s file has been restricted.")
 	    		else
-		        	PLUGIN:SetRestricted(false, "", target, player)
+		        	PLUGIN:SetRestricted(false, "", target, client)
 
-		        	player:Notify(target:Name() .. "'s file has been unrestricted.")
+		        	client:Notify(target:Name() .. "'s file has been unrestricted.")
 	    		end
 		    else
-		    	player:Notify("You do not have access to this command.")
+		    	client:Notify("You do not have access to this command.")
 		    end
 	    else
-	        player:Notify("You have entered an invalid character.")
+	        client:Notify("You have entered an invalid character.")
 	    end
 	end
 })

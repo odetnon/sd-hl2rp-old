@@ -1,105 +1,107 @@
+
 local PLUGIN = PLUGIN
 
 local colours = {
-	white = Color(180, 180, 180, 255),
-	red = Color(231, 76, 60, 255),
-	green = Color(39, 174, 96),
-	blue = Color(41, 128, 185, 255),
+    white = Color(180, 180, 180, 255),
+    red = Color(231, 76, 60, 255),
+    green = Color(39, 174, 96),
+    blue = Color(41, 128, 185, 255),
 }
 
 -- Main datafile panel.
 local PANEL = {}
 
 function PANEL:Init()
-	self:SetTitle("")
+    self:SetTitle("")
 
-	self:SetSize(475, 570)
-	self:Center()
+    self:SetSize(475, 570)
+    self:Center()
 
-	self:MakePopup()
+    self:MakePopup()
 
-	self.Status = ""
+    self.Status = ""
 
-	-- Creation of all elements, text is set in the population functions.
-	self.TopPanel = vgui.Create("cwDfPanel", self)
-	
-	-- TODO: Add the CID here!
-	self.NameLabel = vgui.Create("DLabel", self.TopPanel)
-	self.NameLabel:SetTextColor(Color(255, 255, 255))
-	self.NameLabel:SetFont("DermaLarge")
-	self.NameLabel:Dock(TOP)
-	self.NameLabel:DockMargin(5, 5, 0, 0)
-	self.NameLabel:SizeToContents(true)
+    -- Creation of all elements, text is set in the population functions.
+    self.TopPanel = vgui.Create("ixDfPanel", self)
 
-	self.InfoPanel = vgui.Create("cwDfInfoPanel", self.TopPanel)
+    -- TODO: Add the CID here!
+    self.NameLabel = vgui.Create("DLabel", self.TopPanel)
+    self.NameLabel:SetTextColor(Color(255, 255, 255))
+    self.NameLabel:SetFont("DermaLarge")
+    self.NameLabel:Dock(TOP)
+    self.NameLabel:DockMargin(5, 5, 0, 0)
+    self.NameLabel:SizeToContents(true)
 
-	self.HeaderPanel = vgui.Create("cwDfHeaderPanel", self)
-	self.HeaderPanel:MakeRestricted(true)
+    self.InfoPanel = vgui.Create("ixDfInfoPanel", self.TopPanel)
 
-	self.Entries = vgui.Create("cwDfEntriesPanel", self)
-	self.Entries:MakeRestricted(true)
+    self.HeaderPanel = vgui.Create("ixDfHeaderPanel", self)
+    self.HeaderPanel:MakeRestricted(true)
 
-	-- Lower button panel.
-	self.dButtons = vgui.Create("cwDfPanel", self)
-	self.dButtons:Dock(BOTTOM)
-	self.dButtons:SetTall(35)
+    self.Entries = vgui.Create("ixDfEntriesPanel", self)
+    self.Entries:MakeRestricted(true)
 
-	-- Upper button panel.
-	self.uButtons = vgui.Create("cwDfPanel", self)
-	self.uButtons:Dock(BOTTOM)
-	self.uButtons:SetTall(35)
+    -- Lower button panel.
+    self.dButtons = vgui.Create("ixDfPanel", self)
+    self.dButtons:Dock(BOTTOM)
+    self.dButtons:SetTall(35)
 
-	-- Upper buttons. Population will be done below.
-	self.uLeftButton = vgui.Create("cwDfButton", self.uButtons)
-	self.uLeftButton:SetText("ADD NOTE")
-	self.uLeftButton:SetMetroColor(colours.blue)
-	self.uLeftButton:Dock(LEFT)
+    -- Upper button panel.
+    self.uButtons = vgui.Create("ixDfPanel", self)
+    self.uButtons:Dock(BOTTOM)
+    self.uButtons:SetTall(35)
 
-	self.uRightButton = vgui.Create("cwDfButton", self.uButtons)
-	self.uRightButton:SetText("ADD MEDICAL RECORD")
-	self.uRightButton:SetMetroColor(colours.green)
-	self.uRightButton:Dock(RIGHT)
+    -- Upper buttons. Population will be done below.
+    self.uLeftButton = vgui.Create("ixDfButton", self.uButtons)
+    self.uLeftButton:SetText("ADD NOTE")
+    self.uLeftButton:SetMetroColor(colours.blue)
+    self.uLeftButton:Dock(LEFT)
 
-	-- Bottom buttons.
-	self.dLeftButton = vgui.Create("cwDfButton", self.dButtons)
-	self.dLeftButton:SetText("UPDATE LAST SEEN")
-	self.dLeftButton:Dock(LEFT)
+    self.uRightButton = vgui.Create("ixDfButton", self.uButtons)
+    self.uRightButton:SetText("ADD MEDICAL RECORD")
+    self.uRightButton:SetMetroColor(colours.green)
+    self.uRightButton:Dock(RIGHT)
 
-	self.dMiddleButton = vgui.Create("cwDfButton", self.dButtons)
-	self.dMiddleButton:SetText("CHANGE CIVIL STATUS")
-	self.dMiddleButton:Dock(RIGHT)
+    -- Bottom buttons.
+    self.dLeftButton = vgui.Create("ixDfButton", self.dButtons)
+    self.dLeftButton:SetText("UPDATE LAST SEEN")
+    self.dLeftButton:Dock(LEFT)
 
-	self.DoClose = function()
+    self.dMiddleButton = vgui.Create("ixDfButton", self.dButtons)
+    self.dMiddleButton:SetText("CHANGE CIVIL STATUS")
+    self.dMiddleButton:Dock(RIGHT)
+
+    self.DoClose = function()
         PLUGIN.Datafile = nil
     end
 end
 
 function PANEL:PopulateDatafile(target, datafile)
-	for k, v in pairs(datafile) do
-		local text = datafile[k].text
-		local date = datafile[k].date
-		local poster = datafile[k].poster[1]
-		local points = tonumber(datafile[k].points)
-		local color = datafile[k].poster[3]
-        
+    for k, v in pairs(datafile) do
+        local text = datafile[k].text
+        local date = datafile[k].date
+        local poster = datafile[k].poster[1]
+        local points = tonumber(datafile[k].points)
+        local color = datafile[k].poster[3]
+
         if (datafile[k].category == "union") then
-            local entry = vgui.Create("cwDfEntry", self.Entries.Left)
+            local entry = vgui.Create("ixDfEntry", self.Entries.Left)
             entry:SetEntryText(text, date, "~ " .. poster, points, color)
-            
+
         elseif (datafile[k].category == "med") then
-            local entry = vgui.Create("cwDfEntry", self.Entries.Right)
+            local entry = vgui.Create("ixDfEntry", self.Entries.Right)
             entry:SetEntryText(text, date, "~ " .. poster, points, color)
-        end    end
+        end
+    end
 end
 
 function PANEL:PopulateGenericData(target, datafile, GenericData)
-	local bIsCombine = target:IsCombine()
-	local bIsAntiCitizen
-	local bHasBOL = GenericData.bol[1]
-	local civilStatus = GenericData.civilStatus
-	local lastSeen = GenericData.lastSeen
+    local bIsCombine = target:IsCombine()
+    local bIsAntiCitizen
+    local bHasBOL = GenericData.bol[1]
+    local civilStatus = GenericData.civilStatus
+    local lastSeen = GenericData.lastSeen
 
-	if (bIsCombine) then
+    if (bIsCombine) then
         points = GenericData.sc
         self.InfoPanel:SetInfoText(civilStatus, points, lastSeen)
     else
@@ -107,7 +109,7 @@ function PANEL:PopulateGenericData(target, datafile, GenericData)
         self.InfoPanel:SetInfoText(civilStatus, points, lastSeen)
     end
 
-	if (GenericData.civilStatus == "Anti-Citizen") then
+    if (GenericData.civilStatus == "Anti-Citizen") then
         bIsAntiCitizen = true
     end
 
@@ -122,20 +124,21 @@ function PANEL:PopulateGenericData(target, datafile, GenericData)
 
     self.NameLabel:SetText(target:Name())
 
- 	self.dLeftButton.DoClick = function()
-		net.Start("UpdateLastSeen")
-            net.WriteTable({target})
+    self.dLeftButton.DoClick = function()
+        net.Start("UpdateLastSeen")
+            net.WriteEntity(target)
         net.SendToServer()
-		PLUGIN:Refresh(target)
-	end
+
+        PLUGIN:Refresh(target)
+    end
 
     self.uLeftButton.DoClick = function()
-        local entryPanel = vgui.Create("cwDfNoteEntry")
+        local entryPanel = vgui.Create("ixDfNoteEntry")
         entryPanel:SendInformation(target)
     end
 
     self.uRightButton.DoClick = function()
-        local entryPanel = vgui.Create("cwDfMedicalEntry")
+        local entryPanel = vgui.Create("ixDfMedicalEntry")
         entryPanel:SendInformation(target)
     end
 
@@ -206,11 +209,11 @@ function PANEL:Paint(w, h)
         color = Color(170, 170, 170, 255)
     end
 
-	surface.SetDrawColor(Color(40, 40, 40, 150))
-	surface.DrawRect(0, 0, w, h)
+    surface.SetDrawColor(Color(40, 40, 40, 150))
+    surface.DrawRect(0, 0, w, h)
 
-	surface.SetDrawColor(color)
-	surface.DrawOutlinedRect(0, 0, w, h)
+    surface.SetDrawColor(color)
+    surface.DrawOutlinedRect(0, 0, w, h)
 end
 
-vgui.Register("cwRestrictedDatafile", PANEL, "DFrame")
+vgui.Register("ixRestrictedDatafile", PANEL, "DFrame")
