@@ -1,9 +1,16 @@
 
 FACTION.name = "Vortigaunt"
 FACTION.description = ""
-FACTION.color = Color(100, 200, 100)
-FACTION.models = {
-	"models/hlvr/characters/vortigaunt/vortigaunt_hlvr.mdl"
-}
+FACTION.color = Color(0, 150, 0)
+FACTION.models = {"models/vortigaunt.mdl"}
+FACTION.weapons = {"swep_vortigaunt_beam_edit", "swep_vortigaunt_heal"}
+FACTION.isDefault = false
+FACTION.isGloballyRecognized = false
 
-FACTION_VORT = FACTION.index
+function FACTION:OnTransfered(client)
+	local character = client:GetCharacter()
+
+	character:SetModel(self.models[1])
+end
+
+FACTION_VORTIGAUNT = FACTION.index

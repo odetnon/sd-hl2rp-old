@@ -1,11 +1,11 @@
 
-FACTION.name = "Enslaved Biotic"
+FACTION.name = "Conscript Biotic"
 FACTION.description = ""
-FACTION.color = Color(100, 150, 0)
-FACTION.bAllowDatafile = true
-FACTION.models = {
-	"models/hlvr/characters/vortigaunt/vortigaunt_uncombined_hlvr.mdl"
-}
+FACTION.color = Color(0, 120, 0)
+FACTION.models = {"models/vortigaunt_slave.mdl"}
+FACTION.weapons = {"swep_vortigaunt_sweep"}
+FACTION.isDefault = false
+FACTION.isGloballyRecognized = false
 
 function FACTION:GetDefaultName(client)
 	return "CMB:BIOTIC."..string.format(math.random(1, 99999), "%05d"), true
