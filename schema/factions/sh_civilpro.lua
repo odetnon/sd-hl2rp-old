@@ -23,15 +23,17 @@ function FACTION:OnCharacterCreated(client, character)
 end
 
 function FACTION:GetDefaultName(client)
-	return "CP:00.TAGLINE-0", true
+	return "CP:i7.TAGLINE-0", true
 end
 
 function FACTION:OnNameChanged(client, oldValue, value)
 	local character = client:GetCharacter()
 
-	if (!Schema:IsCombineRank(oldValue, "RCT") and Schema:IsCombineRank(value, "RCT")) then
+	if (!Schema:IsCombineRank(oldValue, "i7") and Schema:IsCombineRank(value, "i7")) then
 		character:JoinClass(CLASS_MPR)
 
+	elseif (!Schema:IsCombineRank(oldValue, "i6") and Schema:IsCombineRank(value, "i6")) then
+		character:JoinClass(CLASS_MPR)
 	elseif (!Schema:IsCombineRank(oldValue, "RL") and Schema:IsCombineRank(value, "RL")) then
 		character:JoinClass(CLASS_EMP)
 	elseif (!Schema:IsCombineRank(oldValue, "i1") and Schema:IsCombineRank(value, "i1")) then

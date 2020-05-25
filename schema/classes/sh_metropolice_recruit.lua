@@ -6,7 +6,7 @@ function CLASS:OnCanBe(client)
 	local name = client:Name()
 	local bStatus = false
 
-	for k, v in ipairs({ "00", "05"}) do
+	for k, v in ipairs({ "i7", "i6"}) do
 		if (Schema:IsCombineRank(name, v)) then
 			bStatus = true
 
