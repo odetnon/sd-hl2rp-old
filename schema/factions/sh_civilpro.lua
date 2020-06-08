@@ -41,10 +41,6 @@ function FACTION:OnNameChanged(client, oldValue, value)
 	elseif (!Schema:IsCombineRank(oldValue, "i2") and Schema:IsCombineRank(value, "i2")) then
 		character:JoinClass(CLASS_EMP)
 	end
-
-	if (!Schema:IsCombineRank(oldValue, "GHOST") and Schema:IsCombineRank(value, "GHOST")) then
-		character:SetModel("models/eliteghostcp.mdl")
-	end
 end
 
 FACTION_CP = FACTION.index

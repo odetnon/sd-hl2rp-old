@@ -1,6 +1,6 @@
 
 ITEM.name = "Citizen Identification Card"
-ITEM.description = "A small card with combine branding"
+ITEM.description = "A small standard-issue card used for identification."
 ITEM.model = "models/sky/cid.mdl"
 
 function ITEM:PopulateTooltip(tooltip)
