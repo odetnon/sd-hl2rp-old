@@ -174,6 +174,23 @@ if (SERVER) then
 			self.nextUseTime = CurTime() + 2
 		end
 	end
+	-- New auto shut-off and turn-on for curfew.
+	function ENT:IsCurfew()
+		if (dispPlusIsCurfew == true) then
+			self:SetEnabled(false)
+			self:EmitSound(self:GetEnabled() and "buttons/combine_button1.wav" or "buttons/combine_button2.wav")
+
+			Schema:SaveRationDispensers()
+			self.nextUseTime = CurTime() + 2
+
+		elseif (dispPlusIsCurfew == false) then
+			self:SetEnabled(true)
+			self:EmitSound(self:GetEnabled() and "buttons/combine_button1.wav" or "buttons/combine_button2.wav")
+
+			Schema:SaveRationDispensers()
+			self.nextUseTime = CurTime() + 2
+		end
+	end
 
 	function ENT:OnRemove()
 		if (!ix.shuttingDown) then

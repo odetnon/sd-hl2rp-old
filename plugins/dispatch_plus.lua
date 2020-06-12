@@ -9,6 +9,7 @@ PLUGIN.list = {
     {"npc/overwatch/cityvoice/f_innactionisconspiracy_spkr.wav", "Citizen reminder: Inaction is conspiracy. Report counter-behaviour to a Civil Protection team immediately."},
     {"npc/overwatch/cityvoice/f_trainstation_offworldrelocation_spkr.wav", "Citizen notice: Failure to cooperate will result in permanent off-world relocation."}
   }
+  
 -- Adds the config option for the delay between broadcasts.
 ix.config.Add("dispatchBroadcastInterval", 60, "The time inbetween automatic Dispatch broadcasts in minutes.", nil, {
 	data = {min = 1, max = 120},
@@ -28,8 +29,9 @@ ix.config.Add("curfewEndTime", 6, "The hour of day that curfew ends.", nil, {
 	data = {min = 1, max = 24},
 	category = "Dispatch Plus"
 })
--- Passive announcements.
+
 if (SERVER) then
+    -- Passive announcements.
     function PLUGIN:Think()
         if ((self.delay or 0) < CurTime()) then
             self.delay = CurTime() + (ix.config.Get("dispatchBroadcastInterval", 1) * 60)
@@ -48,12 +50,12 @@ if (SERVER) then
             net.Broadcast()
         end
     end
-end
--- Curfew announcements.
-if (SERVER) then
+    -- Curfew handler.
     function PLUGIN:Think()
         if (ix.config.Get("enableCurfew")) then
             if ((ix.date.Get(realTime)) == (ix.config.Get("curfewStartTime", 1) * 3600)) then
+                -- Tells the plugin curfew is in effect (used for things like turning off ration dispensers or locking doors - don't change)
+                dispPlusIsCurfew = true
                 -- Plays the announcement alert.
                 net.Start("PlaySound")
                     net.WriteString("ambient/alarms/scanner_alert_pass1.wav")
@@ -67,6 +69,8 @@ if (SERVER) then
                     net.WriteTable({})
                 net.Broadcast()
             elseif ((ix.date.Get(realTime)) == (ix.config.Get("curfewEndTime", 1) * 3600)) then
+                -- Tells the plugin curfew is no longer in effect (don't change)
+                dispPlusIsCurfew = false
                 -- Plays the announcement alert.
                 net.Start("PlaySound")
                     net.WriteString("ambient/alarms/scanner_alert_pass1.wav")
