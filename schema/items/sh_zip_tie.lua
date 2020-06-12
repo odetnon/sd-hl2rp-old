@@ -2,6 +2,7 @@
 ITEM.name = "Zip Tie"
 ITEM.description = "An orange zip-tie used to restrict people."
 ITEM.model = "models/items/crossbowrounds.mdl"
+ITEM.bDropOnDeath = true
 
 ITEM.functions.Use = {
 	OnRun = function(itemTable)
