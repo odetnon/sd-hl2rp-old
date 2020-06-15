@@ -2,6 +2,6 @@
 {
 	"base"		"helix"
 	"title"		"HL2 RP"
-	"author"	"nebulous.cloud"
+	"author"	"Sundown HL2RP"
 	"menusystem" "1"
 }
