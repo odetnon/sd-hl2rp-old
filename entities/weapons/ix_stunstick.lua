@@ -11,7 +11,7 @@ end
 
 SWEP.Category = "HL2 RP"
 SWEP.Author = "Chessnut"
-SWEP.Instructions = "Primary Fire: Stun.\nSHIFT + Primary Fire: Toggle stun.\nSecondary Fire: Push/Knock."
+SWEP.Instructions = "Primary Fire: Stun.\nSHIFT + Secondary Fire: Toggle stun.\nSecondary Fire: Push/Knock."
 SWEP.Purpose = "Hitting things and knocking on doors."
 SWEP.Drop = false
 
@@ -152,32 +152,6 @@ function SWEP:PrimaryAttack()
 		return
 	end
 
-	if (self.Owner:KeyDown(IN_SPEED)) then
-		if (SERVER) then
-			self:SetActivated(!self:GetActivated())
-
-			local state = self:GetActivated()
-
-			if (state) then
-				self.Owner:EmitSound("Weapon_StunStick.Activate")
-
-				if (CurTime() < self.lastRaiseTime + 1.5) then
-					self.Owner:AddCombineDisplayMessage("@cCivilJudgement")
-				end
-			else
-				self.Owner:EmitSound("Weapon_StunStick.Deactivate")
-			end
-
-			local model = string.lower(self.Owner:GetModel())
-
-			if (ix.anim.GetModelClass(model) == "metrocop") then
-				self.Owner:ForceSequence(state and "activatebaton" or "deactivatebaton", nil, nil, true)
-			end
-		end
-
-		return
-	end
-
 	self:EmitSound("Weapon_StunStick.Swing")
 	self:SendWeaponAnim(ACT_VM_HITCENTER)
 
@@ -256,6 +230,32 @@ function SWEP:SecondaryAttack()
 		local trace = util.TraceHull(data)
 		local entity = trace.Entity
 	self.Owner:LagCompensation(false)
+
+	if (self.Owner:KeyDown(IN_SPEED)) then
+		if (SERVER) then
+			self:SetActivated(!self:GetActivated())
+
+			local state = self:GetActivated()
+
+			if (state) then
+				self.Owner:EmitSound("Weapon_StunStick.Activate")
+
+				if (CurTime() < self.lastRaiseTime + 1.5) then
+					self.Owner:AddCombineDisplayMessage("@cCivilJudgement")
+				end
+			else
+				self.Owner:EmitSound("Weapon_StunStick.Deactivate")
+			end
+
+			local model = string.lower(self.Owner:GetModel())
+
+			if (ix.anim.GetModelClass(model) == "metrocop") then
+				self.Owner:ForceSequence(state and "activatebaton" or "deactivatebaton", nil, nil, true)
+			end
+		end
+
+		return
+	end
 
 	if (SERVER and IsValid(entity)) then
 		local bPushed = false

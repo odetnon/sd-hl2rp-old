@@ -11,7 +11,7 @@ PLUGIN.list = {
   }
   
 -- Adds the config option for the delay between broadcasts.
-ix.config.Add("dispatchBroadcastInterval", 60, "The time inbetween automatic Dispatch broadcasts in minutes.", nil, {
+ix.config.Add("dispatchBroadcastInterval", 30, "The time inbetween automatic Dispatch broadcasts in minutes.", nil, {
 	data = {min = 1, max = 120},
 	category = "Dispatch Plus"
 })
@@ -30,8 +30,8 @@ ix.config.Add("curfewEndTime", 6, "The hour of day that curfew ends.", nil, {
 	category = "Dispatch Plus"
 })
 
+-- Passive announcements.
 if (SERVER) then
-    -- Passive announcements.
     function PLUGIN:Think()
         if ((self.delay or 0) < CurTime()) then
             self.delay = CurTime() + (ix.config.Get("dispatchBroadcastInterval", 1) * 60)
@@ -50,39 +50,45 @@ if (SERVER) then
             net.Broadcast()
         end
     end
-    -- Curfew handler.
+end
+-- Curfew handler
+if (SERVER) then
     function PLUGIN:Think()
         if (ix.config.Get("enableCurfew")) then
-            if ((ix.date.Get(realTime)) == (ix.config.Get("curfewStartTime", 1) * 3600)) then
-                -- Tells the plugin curfew is in effect (used for things like turning off ration dispensers or locking doors - don't change)
-                dispPlusIsCurfew = true
-                -- Plays the announcement alert.
-                net.Start("PlaySound")
-                    net.WriteString("ambient/alarms/scanner_alert_pass1.wav")
-                net.Broadcast()
-                -- Sends the chat message.
-                net.Start("ixChatMessage")
-                    net.WriteEntity(NULL)
-                    net.WriteString("dispatch")
-                    net.WriteString("Citizen notice: Mandatory curfew is now in effect. Return to your designated housing block immediately.")
-                    net.WriteBool(false)
-                    net.WriteTable({})
-                net.Broadcast()
-            elseif ((ix.date.Get(realTime)) == (ix.config.Get("curfewEndTime", 1) * 3600)) then
-                -- Tells the plugin curfew is no longer in effect (don't change)
-                dispPlusIsCurfew = false
-                -- Plays the announcement alert.
-                net.Start("PlaySound")
-                    net.WriteString("ambient/alarms/scanner_alert_pass1.wav")
-                net.Broadcast()
-                -- Sends the chat message.
-                net.Start("ixChatMessage")
-                    net.WriteEntity(NULL)
-                    net.WriteString("dispatch")
-                    net.WriteString("Citizen notice: Mandatory curfew is now lifted. You may leave your designated housing block.")
-                    net.WriteBool(false)
-                    net.WriteTable({})
-                net.Broadcast()
+            -- This delay is an awful way to do this and will only stop the announcement continuously playing for 120 seconds - so basically it only works with my schema's custom timescale.
+            if ((self.delay or 0) < CurTime()) then
+                self.delay = CurTime() + 120
+                if (ix.date.Get():gethours()) == (ix.config.Get("curfewStartTime", 1)) then
+                    -- Tells the plugin curfew is in effect (used for things like turning off ration dispensers or locking doors - don't change)
+                    ix.isCurfew = true
+                    -- Plays the announcement alert.
+                    net.Start("PlaySound")
+                        net.WriteString("ambient/alarms/scanner_alert_pass1.wav")
+                    net.Broadcast()
+                    -- Sends the chat message.
+                    net.Start("ixChatMessage")
+                        net.WriteEntity(NULL)
+                        net.WriteString("dispatch")
+                        net.WriteString("Citizen notice: Mandatory curfew is now in effect. Return to your designated housing block immediately.")
+                        net.WriteBool(false)
+                        net.WriteTable({})
+                    net.Broadcast()
+                elseif (ix.date.Get():gethours()) == (ix.config.Get("curfewEndTime", 1)) then
+                    -- Tells the plugin curfew is no longer in effect (don't change)
+                    dispPlusIsCurfew = false
+                    -- Plays the announcement alert.
+                    net.Start("PlaySound")
+                        net.WriteString("ambient/alarms/scanner_alert_pass1.wav")
+                    net.Broadcast()
+                    -- Sends the chat message.
+                    net.Start("ixChatMessage")
+                        net.WriteEntity(NULL)
+                        net.WriteString("dispatch")
+                        net.WriteString("Citizen notice: Mandatory curfew is now lifted. You may leave your designated housing block.")
+                        net.WriteBool(false)
+                        net.WriteTable({})
+                    net.Broadcast()
+                end
             end
         end
     end

@@ -1,5 +1,5 @@
 CLASS.name = "Elite Metropolice"
-CLASS.faction = FACTION_MPF
+CLASS.faction = FACTION_CP
 CLASS.isDefault = false
 
 function CLASS:OnCanBe(client)
