@@ -12,8 +12,8 @@ LANGUAGE = {
 	beingUntied = "They are being untied.",
 	needRequestDevice = "You need a request device to do this.",
 	vendingNeedMoney = "You need %s tokens to purchase this.",
-	vendingPurchased = "You purchased a drink for %s.",
-	vendingRestocked = "You have restocked some drinks.",
+	vendingPurchased = "You purchased something for %s.",
+	vendingRestocked = "You have restocked the vending machine.",
 
 	cCitizenLoaded = "Rebuilding citizen manifest...",
 	cCombineLoaded = "Updating biosignal co-ordinates...",
