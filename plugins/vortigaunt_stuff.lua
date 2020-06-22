@@ -2,8 +2,6 @@ PLUGIN.name = "Vortigaunt Faction"
 PLUGIN.author = "JohnyReaper | Voicelines: sQubany"
 PLUGIN.description = "Adds some features for vortigaunts."
 
-ix.util.Include("sh_voices.lua")
-
 ix.config.Add("VortHealMin", 5, "Minimum health value that can be healed by vortigaunt" , nil, {
 	data = {min = 1, max = 100},
 	category = "Vortigaunt Healing Swep"
@@ -127,7 +125,7 @@ function PLUGIN:GetPlayerDeathSound(client)
 		return false
 	end
 end
-if CLIENT then
+if (CLIENT) then
 	randomVortWords = {"ahglah", "ahhhr", "alla", "allu", "baah", "beh", "bim", "buu", "chaa", "chackt", "churr", "dan", "darr", "dee", "eeya", "ge", "ga", "gaharra",
 "gaka", "galih", "gallalam", "gerr", "gog", "gram", "gu", "gunn", "gurrah", "ha", "hallam", "harra", "hen", "hi", "jah", "jurr", "kallah", "keh", "kih",
 "kurr", "lalli", "llam", "lih", "ley", "lillmah", "lurh", "mah", "min", "nach", "nahh", "neh", "nohaa", "nuy", "raa", "ruhh", "rum", "saa", "seh", "sennah",
@@ -171,7 +169,7 @@ ix.chat.Register("Vortigese", {
 		chat.AddText(color, string.format(self.format, name, text))
 	end,	
 	prefix = {"/v", "/vort"},
-	description = "Says in vortigaunt language",
-	indicator = "Vortigesing",
+	description = "Speak in Vortigese",
+	indicator = "Typing",
 	deadCanChat = false
 })
