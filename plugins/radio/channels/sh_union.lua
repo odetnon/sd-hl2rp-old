@@ -1,3 +1,3 @@
 
 CHANNEL.name = "UNION"
-CHANNEL.color = Color(35, 60, 75)
+CHANNEL.color = Color(75, 150, 50)

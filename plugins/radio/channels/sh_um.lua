@@ -1,3 +1,3 @@
 
 CHANNEL.name = "UM"
-CHANNEL.color = Color(200, 63, 63)
+CHANNEL.color = Color(75, 150, 50)

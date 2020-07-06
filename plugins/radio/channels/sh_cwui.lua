@@ -1,3 +1,3 @@
 
 CHANNEL.name = "CWU-I"
-CHANNEL.color = Color(0, 100, 200)
+CHANNEL.color = Color(75, 150, 50)
