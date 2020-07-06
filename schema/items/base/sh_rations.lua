@@ -24,9 +24,12 @@ ITEM.functions.Open = {
 			end
 		end
 
-		for _, tbl in ipairs(itemTable.randomItem) do
-			if (math.random(1, tbl.chance) == 2) then
-				items[#items + 1] = istable(tbl.items) and tbl.items[math.random(1, #tbl.items)] or tbl.items
+		if (itemTable.randomItem) then
+			
+
+		for _, table in ipairs(itemTable.randomItem) do
+			if (math.random(1, 100) <= table.chance) then
+				items[#items + 1] = istable(table.items) and table.items[math.random(1, #table.items)] or table.items
 				break
 			end
 		end
