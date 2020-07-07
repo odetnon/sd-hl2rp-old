@@ -80,7 +80,7 @@ if (SERVER) then
 	function ENT:SpawnRation(callback, releaseDelay)
 		releaseDelay = releaseDelay or 1.2
 
-		local itemTable = ix.item.Get("ration")
+		local itemTable = ix.item.Get("minimal")
 
 		self.dummy:SetModel(itemTable:GetModel())
 		self.dummy:SetNoDraw(false)
@@ -90,7 +90,7 @@ if (SERVER) then
 		end
 
 		timer.Simple(releaseDelay, function()
-			ix.item.Spawn("ration", self.dummy:GetPos(), function(item, entity)
+			ix.item.Spawn("minimal", self.dummy:GetPos(), function(item, entity)
 				self.dummy:SetNoDraw(true)
 			end, self.dummy:GetAngles())
 
