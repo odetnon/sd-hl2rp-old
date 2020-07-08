@@ -5,7 +5,7 @@ ITEM.description = "A base for ration items."
 ITEM.category = "Union Branded Items"
 ITEM.cash = ix.config.Get("rationTokens", 20)
 ITEM.items = {}
-ITEM.randomItem = {}
+-- ITEM.randomItem = {}
 ITEM.junk = "ration_empty"
 
 ITEM.functions.Open = {
@@ -23,13 +23,13 @@ ITEM.functions.Open = {
 			end
 		end
 		
-		if itemTable.randomItem then
-			if (math.random(1,100) <= itemTable.randomItem.chance) then
-				if (!character:GetInventory():Add(itemTable.randomItem.item)) then
-					ix.item.Spawn(itemTable.randomItem.item, client)
-				end
-			end
-		end
+		if (itemTable.randomItem) then
+            if (math.random(1, 100) <= itemTable.randomItem.chance) then
+                if (!character:GetInventory():Add(itemTable.randomItem.item)) then
+                    ix.item.Spawn(itemTable.randomItem.item, client)
+                end
+            end
+        end
 
         if (itemTable.junk) then
             local junk = client:GetCharacter():GetInv():Add(itemTable.junk)
