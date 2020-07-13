@@ -47,6 +47,8 @@ do
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/deservicedarea.wav"
 				elseif string.find(requestLocation,"DISTRIBUTION BLOCK") then
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/distributionblock.wav"
+				elseif string.find(requestLocation,"EXTERNAL JURISDICTION") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/externaljurisdiction.wav"
 				elseif string.find(requestLocation,"HIGH PRIORITY REGION") then
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/highpriorityregion.wav"
 				elseif string.find(requestLocation,"INDUSTRIAL ZONE") then
