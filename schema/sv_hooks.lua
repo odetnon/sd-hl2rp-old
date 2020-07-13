@@ -134,6 +134,85 @@ function Schema:PlayerDeath(client, inflicter, attacker)
 		elseif string.find(tagline,"-9") then
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/nine.wav"
 		end
+		-- Says the name of the location the biosignal was lost.
+		if string.find(location,"POLITI-CONTROL SECTION") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/controlsection.wav"
+		elseif string.find(location,"404 ZONE") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/404zone.wav"
+		elseif string.find(location,"CANAL BLOCK") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/canalblock.wav"
+		elseif string.find(location,"CONDEMNED ZONE") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/condemnedzone.wav"
+		elseif string.find(location,"RESTRICTED BLOCK") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/deservicedarea.wav"
+		elseif string.find(location,"DISTRIBUTION BLOCK") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/distributionblock.wav"
+		elseif string.find(location,"EXTERNAL JURISDICTION") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/externaljurisdiction.wav"
+		elseif string.find(location,"HIGH PRIORITY REGION") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/highpriorityregion.wav"
+		elseif string.find(location,"INDUSTRIAL ZONE") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/industrialzone.wav"
+		elseif string.find(location,"INFESTED ZONE") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/infestedzone.wav"
+		elseif string.find(location,"OUTLAND ZONE") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/outlandzone.wav"
+		elseif string.find(location,"PRODUCTION BLOCK") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/productionblock.wav"
+		elseif string.find(location,"REPURPOSED AREA") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/repurposedarea.wav"
+		elseif string.find(location,"RESIDENTIAL BLOCK") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/residentialblock.wav"
+		elseif string.find(location,"STORM SYSTEM") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/stormsystem.wav"
+		elseif string.find(location,"TERMINAL RESTRICTION ZONE") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/terminalrestrictionzone.wav"
+		elseif string.find(location,"TRANSIT BLOCK") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/transitblock.wav"
+		elseif string.find(location,"WASTE RIVER") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/wasteriver.wav"
+		elseif string.find(location,"WORKFORCE INTAKE HUB") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/workforceintake.wav"
+		end
+		-- Says the number of the location the request was made.
+		if string.find(location,"1") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/one.wav"
+		elseif string.find(location,"2") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/two.wav"
+		elseif string.find(location,"3") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/three.wav"
+		elseif string.find(location,"4") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/four.wav"
+		elseif string.find(location,"5") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/five.wav"
+		elseif string.find(location,"6") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/six.wav"
+		elseif string.find(location,"7") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/seven.wav"
+		elseif string.find(location,"8") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/eight.wav"
+		elseif string.find(location,"9") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/nine.wav"
+		end
 		-- Ends off the biosignal loss with one of these, or if the chance is above 3 then none of them.
 		if (chance == 1) then
 			sounds[#sounds + 1] = "npc/overwatch/radiovoice/remainingunitscontain.wav"
