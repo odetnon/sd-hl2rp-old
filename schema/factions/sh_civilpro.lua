@@ -2,7 +2,7 @@
 FACTION.name = "Civil Protection"
 FACTION.description = ""
 FACTION.color = Color(50, 100, 150)
-FACTION.models = {"models/cultist/hl_a/metropolice/metrocop.mdl"}
+FACTION.models = {"models/lt_c/sci_fi/humans/female_01.mdl", 0, "022"}
 FACTION.runSounds = {[0] = "NPC_MetroPolice.RunFootstepLeft", [1] = "NPC_MetroPolice.RunFootstepRight"}
 FACTION.bAllowDatafile = true
 FACTION.factionRecognized = {
@@ -23,16 +23,16 @@ function FACTION:OnCharacterCreated(client, character)
 end
 
 function FACTION:GetDefaultName(client)
-	return "CP:i7.TAGLINE-0", true
+	return "CP:i5.TAGLINE-0", true
 end
 
 function FACTION:OnNameChanged(client, oldValue, value)
 	local character = client:GetCharacter()
 
-	if (!Schema:IsCombineRank(oldValue, "i7") and Schema:IsCombineRank(value, "i7")) then
+	if (!Schema:IsCombineRank(oldValue, "i5") and Schema:IsCombineRank(value, "i5")) then
 		character:JoinClass(CLASS_MPR)
 
-	elseif (!Schema:IsCombineRank(oldValue, "i6") and Schema:IsCombineRank(value, "i6")) then
+	elseif (!Schema:IsCombineRank(oldValue, "i4") and Schema:IsCombineRank(value, "i4")) then
 		character:JoinClass(CLASS_MPR)
 	elseif (!Schema:IsCombineRank(oldValue, "RL") and Schema:IsCombineRank(value, "RL")) then
 		character:JoinClass(CLASS_EMP)
