@@ -41,7 +41,6 @@ function PANEL:AddLine(text, color, expireTime, ...)
 	self.lines[index] = {
 		text = "<:: " .. text,
 		color = color or color_white,
-		expireTime = (expireTime != 0 and (CurTime() + (expireTime or 8)) or 0),
 		character = 1
 	}
 
@@ -68,11 +67,6 @@ function PANEL:Paint(width, height)
 	surface.SetFont(self.font)
 
 	for k, info in ipairs(self.lines) do
-		if (info.expireTime != 0 and CurTime() >= info.expireTime) then
-			table.remove(self.lines, k)
-			continue
-		end
-
 		if (info.character < info.text:len()) then
 			info.character = info.character + 1
 		end

@@ -77,17 +77,17 @@ function Schema:PlayerSpawn(client)
 	client:SetCanZoom(client:IsCombine())
 end
 
-function Schema:PlayerDeath(client, character, inflicter, attacker)
+function Schema:PlayerDeath(client, inflicter, attacker)
 	if (client:IsCombine()) then
 		local location = client:GetArea() or "unknown location"
 
 		self:AddCombineDisplayMessage("@cLostBiosignal")
-		self:AddCombineDisplayMessage("@cLostBiosignalLocation", Color(255, 0, 0, 255), nil, location)
+		self:AddCombineDisplayMessage("@cLostBiosignalLocation", Color(255, 0, 0, 255), nil, client:GetName(), location)
 		self:AddWaypoint(client:GetPos(), "Biosignal Lost", Color(255, 0, 0, 255), 300, client)
 
 		local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/lostbiosignalforunit.wav"}
 		local chance = math.random(1, 7)
-		local tagline = string.upper(character:GetName()) -- Stops capitalisation being an issue (not that i'll ever make taglines lowercase)
+		local tagline = string.upper(client:GetName()) -- Stops capitalisation being an issue (not that i'll ever make taglines lowercase)
 		-- This makes dispatch say the tagline of which unit died.
 		if string.find(tagline,"DEFENDER") then
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/defender.wav"
@@ -133,6 +133,7 @@ function Schema:PlayerDeath(client, character, inflicter, attacker)
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/eight.wav"
 		elseif string.find(tagline,"-9") then
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/nine.wav"
+		end
 		-- Ends off the biosignal loss with one of these, or if the chance is above 3 then none of them.
 		if (chance == 1) then
 			sounds[#sounds + 1] = "npc/overwatch/radiovoice/remainingunitscontain.wav"
@@ -159,13 +160,13 @@ function Schema:PlayerHurt(client, attacker, health, damage)
 
 	if (client:IsCombine() and (client.ixTraumaCooldown or 0) < CurTime()) then
 		local text = "External"
-		local unitName = character:GetName()
+		local unitName = client:GetName()
 
 		if (damage > 50) then
 			text = "Severe"
 		end
 
-		self:AddCombineDisplayMessage("@cTrauma", Color(255, 0, 0, 255), nil, text, unitName)
+		self:AddCombineDisplayMessage("@cTrauma", Color(255, 255, 0, 255), nil, text, unitName)
 
 		if (health < 25) then
 			client:AddCombineDisplayMessage("@cDroppingVitals", Color(255, 255, 0, 255))
