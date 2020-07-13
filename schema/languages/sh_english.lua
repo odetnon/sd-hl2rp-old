@@ -23,6 +23,7 @@ LANGUAGE = {
 	cDroppingVitals = "WARNING! VITAL SIGNS DROPPING, SEEK IMMEDIATE MEDICAL ATTENTION",
 	cStaminaLost = "ATTENTION: Excessive user exertion, administering stimulant...",
 	cStaminaGained = "STIMULANT ADMINISTERED",
+	cRequest = "ATTENTION: Incoming civil request from %s...",
 
 	economy = "Economy",
 	voices = "Voices",

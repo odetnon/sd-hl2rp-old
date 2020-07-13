@@ -39,7 +39,7 @@ end
 function Schema:IsCombineRank(text, rank)
 	return string.find(text, "[%D+]"..rank.."[%D+]")
 end
-
+-- Dispatch chat class.
 do
 	local CLASS = {}
 	CLASS.color = Color(150, 100, 100)
@@ -59,7 +59,7 @@ do
 
 	ix.chat.Register("dispatch", CLASS)
 end
-
+-- Request chat class.
 do
 	local CLASS = {}
 	CLASS.color = Color(175, 125, 100)
@@ -71,11 +71,13 @@ do
 
 	function CLASS:OnChatAdd(speaker, text)
 		chat.AddText(self.color, string.format(self.format, speaker:Name(), text))
+		Schema:AddCombineDisplayMessage("@cRequest", Color(0, 0, 255, 255), nil, speaker:Name())
+		Schema:AddWaypoint(client:GetPos(), "Civil Request", Color(0, 0, 255, 255), 300, client)
 	end
 
 	ix.chat.Register("request", CLASS)
 end
-
+-- Request eavesdrop chat class
 do
 	local CLASS = {}
 	CLASS.color = Color(175, 125, 100)
@@ -97,7 +99,7 @@ do
 
 	ix.chat.Register("request_eavesdrop", CLASS)
 end
-
+-- Broadcast chat class
 do
 	local CLASS = {}
 	CLASS.color = Color(150, 125, 175)
