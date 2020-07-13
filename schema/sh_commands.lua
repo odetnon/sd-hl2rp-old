@@ -1,8 +1,7 @@
 
 local communityCommands = {
 	["Content"] = {desc = "Open the servers content pack.", url = "https://steamcommunity.com/sharedfiles/filedetails/?id=1593990171"},
-	["Discord"] = {desc = "Get the community discord invite link.", url = "https://discord.gg/agwxw24"},
-	["Forums"] = {desc = "Open the community forums.", url = "https://pulse-phase.com"}
+	["Discord"] = {desc = "Get the community discord invite link.", url = "https://discord.gg/CZpYthQ"},
 }
 
 do
