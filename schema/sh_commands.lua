@@ -29,7 +29,16 @@ do
 
 		if (inventory:HasItem("request_device") or client:IsCombine() or client:Team() == FACTION_CAB) then
 			if (!client:IsRestricted()) then
-				Schema:AddCombineDisplayMessage("@cRequest")
+				Schema:AddCombineDisplayMessage("@cRequest", Color(0, 0, 255, 255), nil, client:Name())
+				Schema:AddWaypoint(client:GetPos(), client:Name() ..": Civil Request", Color(0, 0, 255, 255), 300, client, client:Name())
+
+				local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/attention.wav", "npc/overwatch/radiovoice/alarms62.wav", "npc/overwatch/radiovoice/inprogress.wav", "npc/overwatch/radiovoice/respond.wav", "npc/overwatch/radiovoice/off4.wav"}
+
+				for k, v in ipairs(player.GetAll()) do
+					if (v:IsCombine()) then
+						ix.util.EmitQueuedSounds(v, sounds, 0, nil, v == client and 100 or 80)
+					end
+				end
 
 				ix.chat.Send(client, "request", message)
 				ix.chat.Send(client, "request_eavesdrop", message)

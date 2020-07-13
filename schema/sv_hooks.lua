@@ -83,7 +83,7 @@ function Schema:PlayerDeath(client, inflicter, attacker)
 
 		self:AddCombineDisplayMessage("@cLostBiosignal")
 		self:AddCombineDisplayMessage("@cLostBiosignalLocation", Color(255, 0, 0, 255), nil, client:GetName(), location)
-		self:AddWaypoint(client:GetPos(), "Biosignal Lost", Color(255, 0, 0, 255), 300, client)
+		self:AddWaypoint(client:GetPos(), client:Name() .."Biosignal Lost", Color(255, 0, 0, 255), 300, client)
 
 		local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/lostbiosignalforunit.wav"}
 		local chance = math.random(1, 7)

@@ -71,8 +71,6 @@ do
 
 	function CLASS:OnChatAdd(speaker, text)
 		chat.AddText(self.color, string.format(self.format, speaker:Name(), text))
-		Schema:AddCombineDisplayMessage("@cRequest", Color(0, 0, 255, 255), nil, speaker:Name())
-		Schema:AddWaypoint(speaker:GetPos(), "%s: Civil Request", Color(0, 0, 255, 255), 300, speaker, speaker:Name())
 	end
 
 	ix.chat.Register("request", CLASS)
