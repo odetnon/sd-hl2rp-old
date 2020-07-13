@@ -30,10 +30,72 @@ do
 		if (inventory:HasItem("request_device") or client:IsCombine() or client:Team() == FACTION_CAB) then
 			if (!client:IsRestricted()) then
 				Schema:AddCombineDisplayMessage("@cRequest", Color(0, 0, 255, 255), nil, client:Name())
-				Schema:AddWaypoint(client:GetPos(), client:Name() ..": Civil Request", Color(0, 0, 255, 255), 300, client, client:Name())
+				Schema:AddWaypoint(client:GetPos(), client:Name() ..": Civil Request", Color(0, 0, 255, 255), 300, client)
 
-				local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/attention.wav", "npc/overwatch/radiovoice/alarms62.wav", "npc/overwatch/radiovoice/inprogress.wav", "npc/overwatch/radiovoice/respond.wav", "npc/overwatch/radiovoice/off4.wav"}
+				local requestLocation = string.upper(client:GetArea())
+				local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/attention.wav", "npc/overwatch/radiovoice/alarms62.wav", "npc/overwatch/radiovoice/inprogress.wav", "npc/overwatch/radiovoice/allunitsat.wav"}
+				-- Says the name of the location the request was made.
+				if string.find(requestLocation,"POLITI-CONTROL SECTION") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/controlsection.wav"
+				elseif string.find(requestLocation,"404 ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/404zone.wav"
+				elseif string.find(requestLocation,"CANAL BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/canalblock.wav"
+				elseif string.find(requestLocation,"CONDEMNED ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/condemnedzone.wav"
+				elseif string.find(requestLocation,"RESTRICTED BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/deservicedarea.wav"
+				elseif string.find(requestLocation,"") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/canalblock.wav"
+				elseif string.find(requestLocation,"HIGH PRIORITY REGION") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/highpriorityregion.wav"
+				elseif string.find(requestLocation,"INDUSTRIAL ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/industrialzone.wav"
+				elseif string.find(requestLocation,"INFESTED ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/infestedzone.wav"
+				elseif string.find(requestLocation,"OUTLAND ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/outlandzone.wav"
+				elseif string.find(requestLocation,"PRODUCTION BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/productionblock.wav"
+				elseif string.find(requestLocation,"REPURPOSED AREA") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/repurposedarea.wav"
+				elseif string.find(requestLocation,"RESIDENTIAL BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/residentialblock.wav"
+				elseif string.find(requestLocation,"STORM SYSTEM") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/stormsystem.wav"
+				elseif string.find(requestLocation,"TERMINAL RESTRICTION ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/terminalrestrictionzone.wav"
+				elseif string.find(requestLocation,"TRANSIT BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/transitblock.wav"
+				elseif string.find(requestLocation,"WASTE RIVER") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/wasteriver.wav"
+				elseif string.find(requestLocation,"WORKFORCE INTAKE HUB") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/workforceintakehub.wav"
+				end
+				-- Says the number of the location the request was made.
+				if string.find(requestLocation,"1") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/one.wav"
+				elseif string.find(requestLocation,"2") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/two.wav"
+				elseif string.find(requestLocation,"3") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/three.wav"
+				elseif string.find(requestLocation,"4") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/four.wav"
+				elseif string.find(requestLocation,"5") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/five.wav"
+				elseif string.find(requestLocation,"6") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/six.wav"
+				elseif string.find(requestLocation,"7") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/seven.wav"
+				elseif string.find(requestLocation,"8") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/eight.wav"
+				elseif string.find(requestLocation,"9") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/nine.wav"
+				end
 
+				sounds[#sounds + 1] = "npc/overwatch/radiovoice/respond.wav"
+				sounds[#sounds + 1] = "npc/overwatch/radiovoice/off4.wav"
+				
 				for k, v in ipairs(player.GetAll()) do
 					if (v:IsCombine()) then
 						ix.util.EmitQueuedSounds(v, sounds, 0, nil, v == client and 100 or 80)
