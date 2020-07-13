@@ -35,43 +35,62 @@ do
 				local requestLocation = string.upper(client:GetArea())
 				local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/attention.wav", "npc/overwatch/radiovoice/alarms62.wav", "npc/overwatch/radiovoice/inprogress.wav"}
 				-- Says the name of the location the request was made.
-				if string.find(location,"POLITI-CONTROL SECTION") then
+				if string.find(requestLocation,"POLITI-CONTROL SECTION") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/controlsection.wav"
-				elseif string.find(location,"404 ZONE") then
+				elseif string.find(requestLocation,"404 ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/404zone.wav"
-				elseif string.find(location,"CANAL BLOCK") then
+				elseif string.find(requestLocation,"CANAL BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/canalblock.wav"
-				elseif string.find(location,"CONDEMNED ZONE") then
+				elseif string.find(requestLocation,"CONDEMNED ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/condemnedzone.wav"
-				elseif string.find(location,"RESTRICTED BLOCK") then
+				elseif string.find(requestLocation,"RESTRICTED BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/deservicedarea.wav"
-				elseif string.find(location,"DISTRIBUTION BLOCK") then
+				elseif string.find(requestLocation,"DISTRIBUTION BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/distributionblock.wav"
-				elseif string.find(location,"EXTERNAL JURISDICTION") then
+				elseif string.find(requestLocation,"EXTERNAL JURISDICTION") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/externaljurisdiction.wav"
-				elseif string.find(location,"HIGH PRIORITY REGION") then
+				elseif string.find(requestLocation,"HIGH PRIORITY REGION") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/highpriorityregion.wav"
-				elseif string.find(location,"INDUSTRIAL ZONE") then
+				elseif string.find(requestLocation,"INDUSTRIAL ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/industrialzone.wav"
-				elseif string.find(location,"INFESTED ZONE") then
+				elseif string.find(requestLocation,"INFESTED ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/infestedzone.wav"
-				elseif string.find(location,"OUTLAND ZONE") then
+				elseif string.find(requestLocation,"OUTLAND ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/outlandzone.wav"
-				elseif string.find(location,"PRODUCTION BLOCK") then
+				elseif string.find(requestLocation,"PRODUCTION BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/productionblock.wav"
-				elseif string.find(location,"REPURPOSED AREA") then
+				elseif string.find(requestLocation,"REPURPOSED AREA") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/repurposedarea.wav"
-				elseif string.find(location,"RESIDENTIAL BLOCK") then
+				elseif string.find(requestLocation,"RESIDENTIAL BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/residentialblock.wav"
-				elseif string.find(location,"STORM SYSTEM") then
+				elseif string.find(requestLocation,"STORM SYSTEM") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/stormsystem.wav"
-				elseif string.find(location,"TERMINAL RESTRICTION ZONE") then
+				elseif string.find(requestLocation,"TERMINAL RESTRICTION ZONE") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/terminalrestrictionzone.wav"
-				elseif string.find(location,"TRANSIT BLOCK") then
+				elseif string.find(requestLocation,"TRANSIT BLOCK") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/transitblock.wav"
-				elseif string.find(location,"WASTE RIVER") then
+				elseif string.find(requestLocation,"WASTE RIVER") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/wasteriver.wav"
-				elseif string.find(location,"WORKFORCE INTAKE HUB") then
+				elseif string.find(requestLocation,"WORKFORCE INTAKE HUB") then
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/allunitsat.wav"
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/workforceintake.wav"
 				end
 				-- Says the number of the location the request was made.
