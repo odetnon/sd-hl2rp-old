@@ -24,7 +24,7 @@ function PLUGIN:Tick()
 				self:AddCombineDisplayMessage(text)
 
 				self.lastRandomDisplayLine = index
-				self.nextRandomLine = CurTime() + 3
+				self.nextRandomLine = CurTime() + 10
 			end
 		end
 	end

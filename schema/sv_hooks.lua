@@ -77,28 +77,59 @@ function Schema:PlayerSpawn(client)
 	client:SetCanZoom(client:IsCombine())
 end
 
-function Schema:PlayerDeath(client, inflicter, attacker)
+function Schema:PlayerDeath(client, character, inflicter, attacker)
 	if (client:IsCombine()) then
 		local location = client:GetArea() or "unknown location"
 
 		self:AddCombineDisplayMessage("@cLostBiosignal")
 		self:AddCombineDisplayMessage("@cLostBiosignalLocation", Color(255, 0, 0, 255), nil, location)
-		self:AddWaypoint(client:GetPos(), "Biosignal Lost", Color(255, 0, 0, 255), 30, client)
+		self:AddWaypoint(client:GetPos(), "Biosignal Lost", Color(255, 0, 0, 255), 300, client)
 
 		local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/lostbiosignalforunit.wav"}
 		local chance = math.random(1, 7)
-
-		if (chance == 2) then
+		local tagline = character:GetName()
+		-- This makes dispatch say the tagline of which unit died.
+		if string.find(tagline,"DEFENDER") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/defender.wav"
+		elseif string.find(tagline,"HERO") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/hero.wav"
+		elseif string.find(tagline,"JURY") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/jury.wav"
+		elseif string.find(tagline,"KING") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/king.wav"
+		elseif string.find(tagline,"QUICK") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/quick.wav"
+		elseif string.find(tagline,"ROLLER") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/roller.wav"
+		elseif string.find(tagline,"STICK") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/stick.wav"
+		elseif string.find(tagline,"UNION") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/union.wav"
+		elseif string.find(tagline,"VICE") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/vice.wav"
+		elseif string.find(tagline,"VICTOR") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/victor.wav"
+		elseif string.find(tagline,"XRAY") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/xray.wav"
+		elseif string.find(tagline,"YELLOW") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/yellow.wav"
+		end
+		-- This makes dispatch say the number of which unit died.
+		-- THIS ISNT ADDED YET WILL DO SOON
+		
+		if (chance == 1) then
 			sounds[#sounds + 1] = "npc/overwatch/radiovoice/remainingunitscontain.wav"
-		elseif (chance == 3) then
+		elseif (chance == 2) then
 			sounds[#sounds + 1] = "npc/overwatch/radiovoice/reinforcementteamscode3.wav"
+		elseif (chance == 3) then
+			sounds[#sounds + 1] = "npc/overwatch/radiovoice/allteamsrespondcode3.wav"
 		end
 
 		sounds[#sounds + 1] = "npc/overwatch/radiovoice/off4.wav"
 
 		for k, v in ipairs(player.GetAll()) do
 			if (v:IsCombine()) then
-				ix.util.EmitQueuedSounds(v, sounds, 2, nil, v == client and 100 or 80)
+				ix.util.EmitQueuedSounds(v, sounds, 0, nil, v == client and 100 or 80)
 			end
 		end
 	end
