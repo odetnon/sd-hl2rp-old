@@ -87,7 +87,7 @@ function Schema:PlayerDeath(client, character, inflicter, attacker)
 
 		local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/lostbiosignalforunit.wav"}
 		local chance = math.random(1, 7)
-		local tagline = character:GetName()
+		local tagline = string.upper(character:GetName())
 		-- This makes dispatch say the tagline of which unit died.
 		if string.find(tagline,"DEFENDER") then
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/defender.wav"
