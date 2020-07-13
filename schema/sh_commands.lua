@@ -70,7 +70,7 @@ do
 				elseif string.find(requestLocation,"WASTE RIVER") then
 					sounds[#sounds+1] = "npc/overwatch/radiovoice/wasteriver.wav"
 				elseif string.find(requestLocation,"WORKFORCE INTAKE HUB") then
-					sounds[#sounds+1] = "npc/overwatch/radiovoice/workforceintakehub.wav"
+					sounds[#sounds+1] = "npc/overwatch/radiovoice/workforceintake.wav"
 				end
 				-- Says the number of the location the request was made.
 				if string.find(requestLocation,"1") then
