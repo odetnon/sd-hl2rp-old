@@ -87,7 +87,7 @@ function Schema:PlayerDeath(client, character, inflicter, attacker)
 
 		local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/lostbiosignalforunit.wav"}
 		local chance = math.random(1, 7)
-		local tagline = string.upper(character:GetName())
+		local tagline = string.upper(character:GetName()) -- Stops capitalisation being an issue (not that i'll ever make taglines lowercase)
 		-- This makes dispatch say the tagline of which unit died.
 		if string.find(tagline,"DEFENDER") then
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/defender.wav"
@@ -114,7 +114,7 @@ function Schema:PlayerDeath(client, character, inflicter, attacker)
 		elseif string.find(tagline,"YELLOW") then
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/yellow.wav"
 		end
-		-- This makes dispatch say the number of which unit died.
+		-- This makes dispatch say the number of which unit died (it works I guess? not the most robust method maybe?).
 		if string.find(tagline,"-1") then
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/one.wav"
 		elseif string.find(tagline,"-2") then
@@ -159,15 +159,16 @@ function Schema:PlayerHurt(client, attacker, health, damage)
 
 	if (client:IsCombine() and (client.ixTraumaCooldown or 0) < CurTime()) then
 		local text = "External"
+		local unitName = character:GetName()
 
 		if (damage > 50) then
 			text = "Severe"
 		end
 
-		client:AddCombineDisplayMessage("@cTrauma", Color(255, 0, 0, 255), nil, text)
+		self:AddCombineDisplayMessage("@cTrauma", Color(255, 0, 0, 255), nil, text, unitName)
 
 		if (health < 25) then
-			client:AddCombineDisplayMessage("@cDroppingVitals", Color(255, 0, 0, 255))
+			client:AddCombineDisplayMessage("@cDroppingVitals", Color(255, 255, 0, 255))
 		end
 
 		client.ixTraumaCooldown = CurTime() + 15
