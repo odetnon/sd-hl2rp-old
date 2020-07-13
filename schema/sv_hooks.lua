@@ -115,8 +115,25 @@ function Schema:PlayerDeath(client, character, inflicter, attacker)
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/yellow.wav"
 		end
 		-- This makes dispatch say the number of which unit died.
-		-- THIS ISNT ADDED YET WILL DO SOON
-		
+		if string.find(tagline,"-1") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/one.wav"
+		elseif string.find(tagline,"-2") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/two.wav"
+		elseif string.find(tagline,"-3") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/three.wav"
+		elseif string.find(tagline,"-4") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/four.wav"
+		elseif string.find(tagline,"-5") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/five.wav"
+		elseif string.find(tagline,"-6") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/six.wav"
+		elseif string.find(tagline,"-7") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/seven.wav"
+		elseif string.find(tagline,"-8") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/eight.wav"
+		elseif string.find(tagline,"-9") then
+			sounds[#sounds+1] = "npc/overwatch/radiovoice/nine.wav"
+		-- Ends off the biosignal loss with one of these, or if the chance is above 3 then none of them.
 		if (chance == 1) then
 			sounds[#sounds + 1] = "npc/overwatch/radiovoice/remainingunitscontain.wav"
 		elseif (chance == 2) then
