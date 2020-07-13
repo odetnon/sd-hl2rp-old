@@ -4,5 +4,5 @@ ITEM.model = "models/weapons/w_crowbar.mdl"
 ITEM.height = 1
 ITEM.width = 3
 
-ITEM.class = "tfa_mmod_crowbar"
+ITEM.class = "tfa_hl2r_crowbar"
 ITEM.weaponCategory = "melee"
