@@ -31,10 +31,11 @@ function FACTION:GetDefaultName(client)
 end
 
 function FACTION:OnCharacterCreated(client, character)
-	local inventory = character:GetInventory()
+	local max = ix.config.Get("maxAttributes", 100)
 
-	inventory:Add("pulse_rifle", 1)
-	inventory:Add("ar2_ammo", 1)
+	for k, v in pairs(ix.attributes.list) do
+		character:SetAttrib(k, v.maxValue or max)
+	end
 end
 
 FACTION_OTA = FACTION.index
