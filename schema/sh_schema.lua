@@ -1,6 +1,6 @@
 
 Schema.name = "HL2 RP"
-Schema.author = "nebulous.cloud"
+Schema.author = "Sundown HL2RP"
 Schema.description = "A schema based off of HL2."
 
 ix.util.Include("sh_commands.lua")
@@ -117,3 +117,5 @@ do
 
 	ix.chat.Register("broadcast", CLASS)
 end
+
+print("[Sundown HL2RP] If you're seeing this on a server not called Sundown, somebody has stolen the schema!")
