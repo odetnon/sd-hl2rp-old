@@ -4,7 +4,7 @@ FACTION.description = ""
 FACTION.color = Color(0, 120, 0)
 FACTION.models = {"models/vortigaunt_slave.mdl"}
 FACTION.weapons = {"swep_vortigaunt_sweep"}
-FACTION.isDefault = true
+FACTION.isDefault = false
 FACTION.isGloballyRecognized = false
 
 function FACTION:GetDefaultName(client)
