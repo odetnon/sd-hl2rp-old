@@ -117,5 +117,3 @@ do
 
 	ix.chat.Register("broadcast", CLASS)
 end
-
-print("[Sundown HL2RP] If you're seeing this on a server not called Sundown, somebody has stolen the schema!")

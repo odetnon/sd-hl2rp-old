@@ -86,7 +86,7 @@ function Schema:PlayerDeath(client, inflicter, attacker)
 		self:AddWaypoint(client:GetPos(), client:Name() .."Biosignal Lost", Color(255, 0, 0, 255), 300, client)
 
 		local sounds = {"npc/overwatch/radiovoice/on1.wav", "npc/overwatch/radiovoice/lostbiosignalforunit.wav"}
-		local chance = math.random(1, 7)
+		local chance = math.random(1, 5)
 		local tagline = string.upper(client:GetName()) -- Stops capitalisation being an issue (not that i'll ever make taglines lowercase)
 		-- This makes dispatch say the tagline of which unit died.
 		if string.find(tagline,"DEFENDER") then
