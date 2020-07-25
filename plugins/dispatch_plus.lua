@@ -2,7 +2,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "Dispatch Plus"
-PLUGIN.author = "Dev#2786"
+PLUGIN.author = "Sundown HL2RP"
 PLUGIN.description = "Adds in automated dispatch announcements."
 -- List for the random announcements that can play.
 PLUGIN.list = {
@@ -11,7 +11,7 @@ PLUGIN.list = {
   }
   
 -- Adds the config option for the delay between broadcasts.
-ix.config.Add("dispatchBroadcastInterval", 30, "The time inbetween automatic Dispatch broadcasts in minutes.", nil, {
+ix.config.Add("dispatchBroadcastInterval", 30, "The time between automatic Dispatch broadcasts in minutes.", nil, {
 	data = {min = 1, max = 120},
 	category = "Dispatch Plus"
 })
@@ -30,8 +30,8 @@ ix.config.Add("curfewEndTime", 6, "The hour of day that curfew ends.", nil, {
 	category = "Dispatch Plus"
 })
 
--- Passive announcements.
 if (SERVER) then
+    -- Passive announcements
     function PLUGIN:Think()
         if ((self.delay or 0) < CurTime()) then
             self.delay = CurTime() + (ix.config.Get("dispatchBroadcastInterval", 1) * 60)
@@ -50,15 +50,12 @@ if (SERVER) then
             net.Broadcast()
         end
     end
-end
--- Curfew handler
-if (SERVER) then
+    -- Curfew handler
     function PLUGIN:Think()
         if (ix.config.Get("enableCurfew")) then
-            -- This delay is an awful way to do this and will only stop the announcement continuously playing for 120 seconds - so basically it only works with my schema's custom timescale.
             if ((self.delay or 0) < CurTime()) then
                 self.delay = CurTime() + 120
-                if (ix.date.Get():gethours()) == (ix.config.Get("curfewStartTime", 1)) then
+                if (StormFox.GetTime(true)) == (ix.config.Get("curfewStartTime", 1) * 60) then
                     -- Tells the plugin curfew is in effect (used for things like turning off ration dispensers or locking doors - don't change)
                     ix.isCurfew = true
                     -- Plays the announcement alert.
@@ -73,9 +70,9 @@ if (SERVER) then
                         net.WriteBool(false)
                         net.WriteTable({})
                     net.Broadcast()
-                elseif (ix.date.Get():gethours()) == (ix.config.Get("curfewEndTime", 1)) then
+                elseif (StormFox.GetTime(true)) == (1380) then
                     -- Tells the plugin curfew is no longer in effect (don't change)
-                    dispPlusIsCurfew = false
+                    ix.isCurfew = false
                     -- Plays the announcement alert.
                     net.Start("PlaySound")
                         net.WriteString("ambient/alarms/scanner_alert_pass1.wav")
