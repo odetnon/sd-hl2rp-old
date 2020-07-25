@@ -28,7 +28,7 @@ function PANEL:Init()
 		self.time:SetText(StormFox.GetRealTime())
 		self.time.Think = function(this)
 			if ((this.nextTime or 0) < CurTime()) then
-				this:SetText(StormFox.GetTime(true)) -- Set to StormFox.GetTime(true) when debugging! Set to StormFox.GetRealTime() for release builds.
+				this:SetText(StormFox.GetRealTime()) -- Set to StormFox.GetTime(true) when debugging! Set to StormFox.GetRealTime() for release builds.
 				this.nextTime = CurTime() + 0.5
 			end
 		end
