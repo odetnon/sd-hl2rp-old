@@ -70,7 +70,7 @@ if (SERVER) then
                         net.WriteTable({})
                     net.Broadcast()
                     self.curfDelay = CurTime() + 60
-                elseif (StormFox.GetTime(true)) == (1380) then
+                elseif (StormFox.GetTime(true)) == (ix.config.Get("curfewEndTime", 1) * 60) then
                     -- Tells the plugin curfew is no longer in effect (don't change)
                     ix.isCurfew = false
                     -- Plays the announcement alert.
