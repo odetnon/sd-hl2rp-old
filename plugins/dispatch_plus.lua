@@ -53,8 +53,7 @@ if (SERVER) then
     -- Curfew handler
     function PLUGIN:Think()
         if (ix.config.Get("enableCurfew")) then
-            if ((self.delay or 0) < CurTime()) then
-                self.delay = CurTime() + 60
+            if ((self.curfDelay or 0) < CurTime()) then
                 if (StormFox.GetTime(true)) == (ix.config.Get("curfewStartTime", 1) * 60) then
                     -- Tells the plugin curfew is in effect (used for things like turning off ration dispensers or locking doors - don't change)
                     ix.isCurfew = true
@@ -70,6 +69,7 @@ if (SERVER) then
                         net.WriteBool(false)
                         net.WriteTable({})
                     net.Broadcast()
+                    self.curfDelay = CurTime() + 60
                 elseif (StormFox.GetTime(true)) == (1380) then
                     -- Tells the plugin curfew is no longer in effect (don't change)
                     ix.isCurfew = false
@@ -85,6 +85,7 @@ if (SERVER) then
                         net.WriteBool(false)
                         net.WriteTable({})
                     net.Broadcast()
+                    self.curfDelay = CurTime() + 60
                 end
             end
         end
