@@ -2,7 +2,7 @@
 FACTION.name = "Civil Protection"
 FACTION.description = ""
 FACTION.color = Color(50, 100, 150)
-FACTION.models = {"models/lt_c/sci_fi/humans/female_01.mdl", 0, "022"}
+FACTION.models = {"models/ma/hla/terranovapolice.mdl", 0, "022"}
 FACTION.runSounds = {[0] = "NPC_MetroPolice.RunFootstepLeft", [1] = "NPC_MetroPolice.RunFootstepRight"}
 FACTION.bAllowDatafile = true
 FACTION.factionRecognized = {
@@ -15,6 +15,12 @@ FACTION.channels = {
 FACTION.canSeeWaypoints = true
 FACTION.canAddWaypoints = true
 FACTION.noGas = true
+FACTION.painSounds = {"npc/metropolice/pain1.wav","npc/metropolice/pain2.wav","npc/metropolice/pain3.wav","npc/metropolice/pain4.wav"}
+
+function FACTION:GetPlayerPainSound(client)
+	local randomSelection = self.painSounds[math.random(#self.painSounds)]
+	return randomSelection[1], true
+end
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()

@@ -18,7 +18,7 @@ function Schema:PlayerLoadout(client)
 end
 
 function Schema:PlayerSwitchFlashlight(client, enabled)
-	if (client:GetCharacter():GetInventory():HasItem("flashlight") or client:IsCombine()) then
+	if (client:GetCharacter():GetInventory():HasItem("flashlight") or client:IsCombine() or client:IsDispatch()) then
 		return true
 	end
 end
