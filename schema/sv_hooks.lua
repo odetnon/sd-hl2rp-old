@@ -140,6 +140,9 @@ function Schema:PlayerDeath(client, inflicter, attacker)
 		elseif string.find(tagline,"-9") then
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/nine.wav"
 		end
+
+		sounds[#sounds + 1] = "npc/overwatch/radiovoice/unitdownat.wav"
+
 		-- Says the name of the location the biosignal was lost.
 		if string.find(dispatchLocation,"POLITI-CONTROL SECTION") then
 			sounds[#sounds+1] = "npc/overwatch/radiovoice/controlsection.wav"
