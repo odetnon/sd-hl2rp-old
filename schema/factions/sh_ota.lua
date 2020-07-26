@@ -25,12 +25,6 @@ FACTION.canRemoveWaypoints = true
 FACTION.canUpdateWaypoints = true
 FACTION.noGas = true
 FACTION.noNeeds = true
-FACTION.painSounds = {"npc/combine_soldier/pain1.wav","npc/combine_soldier/pain2.wav","npc/combine_soldier/pain3.wav"}
-
-function FACTION:GetPlayerPainSound(client)
-	local randomSelection = self.painSounds[math.random(#self.painSounds)]
-	return randomSelection[1], true
-end
 
 function FACTION:GetDefaultName(client)
 	return "OTA:OWS.ECHO."..string.format("%05d", math.random(1, 99999)), true

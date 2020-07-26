@@ -15,12 +15,6 @@ FACTION.channels = {
 FACTION.canSeeWaypoints = true
 FACTION.canAddWaypoints = true
 FACTION.noGas = true
-FACTION.painSounds = {"npc/metropolice/pain1.wav","npc/metropolice/pain2.wav","npc/metropolice/pain3.wav","npc/metropolice/pain4.wav"}
-
-function FACTION:GetPlayerPainSound(client)
-	local randomSelection = self.painSounds[math.random(#self.painSounds)]
-	return randomSelection[1], true
-end
 
 function FACTION:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
