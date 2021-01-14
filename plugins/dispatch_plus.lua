@@ -2,7 +2,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "Dispatch Plus"
-PLUGIN.author = "Sundown HL2RP"
+PLUGIN.author = "Dev#2768"
 PLUGIN.description = "Adds in automated dispatch announcements."
 -- List for the random announcements that can play.
 PLUGIN.list = {
